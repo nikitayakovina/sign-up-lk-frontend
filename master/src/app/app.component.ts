@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'master';
+  public form: FormGroup = new FormGroup({
+      username: new FormControl(''),
+      password: new FormControl(''),
+  });
+
+  submit() {
+      if (this.form.valid) {
+
+      }
+  }
 }
