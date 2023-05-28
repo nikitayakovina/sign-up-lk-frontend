@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/empty-angular-project",
+            "outputPath": "dist/sign-up-lk-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -97,11 +97,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "8c6ee2ff-e7a3-4025-b5cb-9a12f58563a0"
+    "analytics": "8c6ee2ff-e7a3-4025-b5cb-9a12f58563a0",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
