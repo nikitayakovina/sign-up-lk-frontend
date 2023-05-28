@@ -1,0 +1,10 @@
+<div class="form">
+    <tabset>
+        <tab id="authorization" #tabAuthorization="tab" heading="Вход">
+            <app-authorization *ngIf="tabAuthorization.active"></app-authorization>
+        </tab>
+        <tab id="registration" #tabRegistration="tab" heading="Регистрация">
+            <app-registration *ngIf="tabRegistration.active"></app-registration>
+        </tab>
+    </tabset>
+</div>
