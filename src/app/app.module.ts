@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { AuthorizationComponent } from './modules/components/authorization/authorization.component';
 import { RegistrationComponent } from './modules/components/registration/registration.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, AuthorizationComponent, RegistrationComponent],
-  imports: [BrowserModule, AppRoutingModule, TabsModule],
+  imports: [BrowserModule, AppRoutingModule, TabsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
