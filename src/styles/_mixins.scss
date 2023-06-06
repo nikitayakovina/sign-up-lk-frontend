@@ -1,0 +1,5 @@
+@import "variables";
+
+@function asset_url_sprite($file) {
+  @return url($asset-base-path_sprite + $file);
+}

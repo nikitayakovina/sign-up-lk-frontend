@@ -1,0 +1,12 @@
+@import '../mixins';
+
+.svg-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    background-repeat: no-repeat;
+
+    &--russia {
+        background-image: asset_url_sprite('russia-2.svg');
+    }
+}

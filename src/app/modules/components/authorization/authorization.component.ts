@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../common/services/auth.service';
 
 @Component({
   selector: 'app-authorization',
@@ -8,11 +9,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AuthorizationComponent {
   public form = new FormGroup({
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
   });
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  public onSubmit() {}
+  public onSubmit() {
+    this.authService.register('+79618833873').subscribe(
+      (next) => {
+        alert(next);
+      },
+      (error) => alert(error),
+    );
+  }
 }

@@ -1,18 +1,8 @@
 @import "node_modules/bootstrap/dist/css/bootstrap.css";
+@import "styles/global/icons";
+@import "styles/variables";
+@import "styles/mixins";
 
 body {
     background-color: #f6f7ff;
-}
-
-tabset {
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-
-        li {
-            margin-right: 10px;
-        }
-    }
 }
