@@ -3,6 +3,7 @@
 @import "styles/variables";
 @import "styles/mixins";
 
-body {
+html, body {
+    height: 100vh;
     background-color: #f6f7ff;
 }

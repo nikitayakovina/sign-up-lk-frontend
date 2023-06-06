@@ -8,6 +8,7 @@ import { AuthService } from '../../../common/services/auth.service';
   styleUrls: ['./authorization.component.scss'],
 })
 export class AuthorizationComponent {
+  public isFocused = false;
   public form = new FormGroup({
     phone: new FormControl('', Validators.required),
   });
@@ -22,4 +23,8 @@ export class AuthorizationComponent {
       (error) => alert(error),
     );
   }
+
+  public onFocus = () => (this.isFocused = true);
+
+  public onBlur = () => (this.isFocused = false);
 }

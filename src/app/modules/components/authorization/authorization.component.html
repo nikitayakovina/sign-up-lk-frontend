@@ -1,9 +1,24 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="inputPhone">Введите номер телефона</label>
+<div class="auth-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <div class="">
+                <label for="inputPhone">Введите номер телефона</label>
+            </div>
 
-        <img class="svg-icon" src="/assets/img/sprite/russia.svg">
-        <input value="+7" type="number" class="form-control" id="inputPhone" formControlName="phone">
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Получить код</button>
-</form>
+            <div class="phone-number" [class.phone-number-active]="isFocused">
+                <div class="phone-number__country">
+                    <div class="phone-number__country-container">
+                        <img class="svg-icon" src="/assets/img/sprite/russia.svg">
+                        <div class="phone-number__country-container__code">
+                            <span>+7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-number__input">
+                    <input type="number" class="form-control" id="inputPhone" formControlName="phone" (focus)="onFocus()" (blur)="onBlur()">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Получить код</button>
+    </form>
+</div>

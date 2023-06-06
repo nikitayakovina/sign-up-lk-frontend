@@ -1,0 +1,50 @@
+@import "src/styles/variables";
+
+.auth-form {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: $border-color 1px solid;
+
+    .phone-number {
+        display: flex;
+
+        &__country {
+            display: flex;
+            background-color: $white;
+            border-radius: 5px 0 0 5px;
+            border: $border-color solid 1px;
+            border-right: 0;
+
+            &-container {
+                align-self: center;
+                display: flex;
+                padding-left: 10px;
+
+                &__code {
+                    padding-left: 5px;
+                }
+            }
+        }
+
+        &__input {
+            input {
+                border: $border-color solid 1px;
+                border-left: 0;
+                border-radius: 0 5px 5px 0;
+                padding-left: 0;
+            }
+        }
+
+        &-active {
+            border: $black solid 1px;
+            border-radius: 5px;
+        }
+    }
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
