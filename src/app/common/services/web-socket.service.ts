@@ -15,17 +15,20 @@ export class WebSocketService {
 
   constructor(private socket: Socket) {}
 
-  public connect(phone: string) {
+  public connect() {
     this.socket = new Socket(this.config);
     this.socket.connect();
 
+    // @ts-ignore
+    this.socket.on('connection', (value) => {
+      console.log(value);
+    });
+  }
+
+  public emitPhone(phone: string) {
     this.socket.emit('phone', {
       phone,
     });
-    // @ts-ignore
-    // this.socket.on('connection', (value) => {
-    //   console.log(value);
-    // });
   }
 
   public destroy() {
