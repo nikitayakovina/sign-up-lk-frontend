@@ -14,14 +14,16 @@ export class AuthorizationComponent implements OnDestroy {
     phone: new FormControl('', Validators.required),
   });
 
-  constructor(private authService: AuthService, private wsService: WebSocketService) {}
+  constructor(private authService: AuthService, private wsService: WebSocketService) {
+    this.wsService.connect();
+  }
 
   public onSubmit() {
     const phone = `+7${this.form.value.phone}`;
 
     this.authService.register(phone).subscribe(
       () => {
-        this.wsService.connect(phone);
+        this.wsService.emitPhone(phone);
       },
       (error) => console.log(error),
     );
