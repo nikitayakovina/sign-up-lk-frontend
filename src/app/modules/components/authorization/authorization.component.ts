@@ -9,6 +9,7 @@ import { WebSocketService } from '../../../common/services/web-socket.service';
   styleUrls: ['./authorization.component.scss'],
 })
 export class AuthorizationComponent implements OnDestroy {
+  private readonly code: string = '+7';
   public isFocused = false;
   public form = new FormGroup({
     phone: new FormControl('', Validators.required),
@@ -19,7 +20,7 @@ export class AuthorizationComponent implements OnDestroy {
   }
 
   public onSubmit() {
-    const phone = `+7${this.form.value.phone}`;
+    const phone = `${this.code}${this.form.value.phone}`;
 
     this.authService.register(phone).subscribe(
       () => {

@@ -1,22 +1,33 @@
 @import "src/styles/variables";
 
 .auth-form {
-    width: 500px;
-    height: 500px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    border: $border-color 1px solid;
+    padding: 40px;
+    width: 100%;
+
+    form {
+        width: inherit;
+    }
 
     .phone-number {
         display: flex;
+        border: $border-color solid 1px;
+        border-radius: 5px;
+        padding: 2px;
+
+        &-active {
+            border: $black solid 1px;
+        }
 
         &__country {
             display: flex;
             background-color: $white;
-            border-radius: 5px 0 0 5px;
-            border: $border-color solid 1px;
-            border-right: 0;
+
+            &-active {
+                border: $black solid 1px;
+                border-right: 0;
+            }
 
             &-container {
                 align-self: center;
@@ -30,18 +41,18 @@
         }
 
         &__input {
+            flex: 1;
+
             input {
-                border: $border-color solid 1px;
-                border-left: 0;
-                border-radius: 0 5px 5px 0;
+                border: 0;
                 padding-left: 0;
             }
         }
+    }
 
-        &-active {
-            border: $black solid 1px;
-            border-radius: 5px;
-        }
+    .button-submit {
+        margin-top: 20px;
+        width: 100%;
     }
 }
 
