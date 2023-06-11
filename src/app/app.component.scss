@@ -1,0 +1,13 @@
+::ng-deep .modal-content {
+  border: 0;
+}
+.modal-header {
+  .close {
+    border: none;
+    background-color: white;
+  }
+}
+
+.modal-body {
+  padding: 0;
+}

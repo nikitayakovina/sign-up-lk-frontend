@@ -1,7 +1,7 @@
 <div class="auth-form">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <div class="">
+            <div>
                 <label for="inputPhone">Введите номер телефона</label>
             </div>
 
@@ -19,6 +19,6 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Получить код</button>
+        <button type="submit" class="btn btn-primary button-submit" [disabled]="!form.valid">Получить код</button>
     </form>
 </div>
