@@ -10,9 +10,17 @@ import { WebSocketService } from '../../../common/services/web-socket.service';
 })
 export class AuthorizationComponent implements OnDestroy {
   private readonly code: string = '+7';
+
+  public isShowFormCode = false;
   public isFocused = false;
-  public form = new FormGroup({
+  public formPhone = new FormGroup({
     phone: new FormControl('', Validators.required),
+    code: new FormGroup({
+      first: new FormControl('', Validators.required),
+      second: new FormControl('', Validators.required),
+      third: new FormControl('', Validators.required),
+      fourth: new FormControl('', Validators.required),
+    }),
   });
 
   constructor(private authService: AuthService, private wsService: WebSocketService) {
@@ -20,7 +28,7 @@ export class AuthorizationComponent implements OnDestroy {
   }
 
   public onSubmit() {
-    const phone = `${this.code}${this.form.value.phone}`;
+    const phone = `${this.code}${this.formPhone.value.phone}`;
 
     this.authService.register(phone).subscribe(
       () => {
@@ -28,6 +36,20 @@ export class AuthorizationComponent implements OnDestroy {
       },
       (error) => console.log(error),
     );
+
+    this.wsService.asObservable.subscribe((response) => {
+      this.isShowFormCode = response;
+    });
+  }
+
+  public sendCode() {
+    const code =
+      this.formPhone.controls.code.value.first.toString() +
+      this.formPhone.controls.code.value.second.toString() +
+      this.formPhone.controls.code.value.third.toString() +
+      this.formPhone.controls.code.value.fourth.toString();
+
+    this.wsService.emitCode(code);
   }
 
   public onFocus = () => (this.isFocused = true);

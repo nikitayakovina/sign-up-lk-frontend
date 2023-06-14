@@ -54,6 +54,33 @@
         margin-top: 20px;
         width: 100%;
     }
+
+    .sms-code {
+        margin-top: 40px;
+
+        &__title {
+            text-align: center;
+        }
+
+        &__inputs {
+            display: flex;
+            justify-content: center;
+            margin-top: 6px;
+            margin-bottom: 40px;
+
+            &-input {
+                width: 80px;
+                height: 80px;
+                border: $border-color solid 1px;
+                border-radius: 5px;
+                text-align: center;
+
+                &:not(:first-child) {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
 }
 
 .form-control:focus {

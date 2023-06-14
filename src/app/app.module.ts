@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './common/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
@@ -21,6 +21,7 @@ const config: SocketIoConfig = {
   declarations: [AppComponent, AuthorizationComponent],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     TabsModule,
     ReactiveFormsModule,

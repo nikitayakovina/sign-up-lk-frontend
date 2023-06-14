@@ -1,5 +1,5 @@
 <div class="auth-form">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formPhone" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <div>
                 <label for="inputPhone">Введите номер телефона</label>
@@ -15,10 +15,31 @@
                     </div>
                 </div>
                 <div class="phone-number__input">
-                    <input type="number" class="form-control" id="inputPhone" formControlName="phone" (focus)="onFocus()" (blur)="onBlur()">
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="inputPhone"
+                        formControlName="phone"
+                        [disabled]="isShowFormCode"
+                        (focus)="onFocus()"
+                        (blur)="onBlur()">
                 </div>
             </div>
+
+            <div *ngIf="isShowFormCode" formGroupName="code" class="sms-code">
+                <div class="sms-code__title">
+                    Введите код из СМС или прослушайте код, ответив на входящий вызов
+                </div>
+                <div class="sms-code__inputs">
+                    <input formControlName="first" type="number" inputmode="numeric" class="sms-code__inputs-input">
+                    <input formControlName="second" type="number" inputmode="numeric" class="sms-code__inputs-input">
+                    <input formControlName="third" type="number" inputmode="numeric" class="sms-code__inputs-input">
+                    <input formControlName="fourth" type="number" inputmode="numeric" class="sms-code__inputs-input">
+                </div>
+                <button class="btn btn-primary button-submit" [disabled]="!formPhone.controls.code.valid" (click)="sendCode()">Отправить код</button>
+            </div>
+
         </div>
-        <button type="submit" class="btn btn-primary button-submit" [disabled]="!form.valid">Получить код</button>
+        <button *ngIf="!isShowFormCode" type="submit" class="btn btn-primary button-submit" [disabled]="!formPhone.controls.phone.valid">Получить код</button>
     </form>
 </div>
