@@ -9,7 +9,7 @@ import { Observable, Subject } from 'rxjs';
 export class WebSocketService {
   private storage: boolean;
   private subject: Subject<boolean> = new Subject<boolean>();
-  private config: SocketIoConfig = {
+  private readonly config: SocketIoConfig = {
     url: environment.url,
     options: {
       autoConnect: false,
@@ -22,9 +22,8 @@ export class WebSocketService {
     this.socket = new Socket(this.config);
     this.socket.connect();
 
-    // @ts-ignore
-    this.socket.on('connection', (value) => {
-      console.log(value);
+    this.socket.emit('connection', {
+      socket: this.socket,
     });
   }
 
