@@ -1,5 +1,5 @@
 <div class="auth-form">
-    <form [formGroup]="formPhone" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formPhone">
         <div class="form-group">
             <div>
                 <label for="inputPhone">Введите номер телефона</label>
@@ -40,6 +40,12 @@
             </div>
 
         </div>
-        <button *ngIf="!isShowFormCode" type="submit" class="btn btn-primary button-submit" [disabled]="!formPhone.controls.phone.valid">Получить код</button>
+        <button
+            *ngIf="!isShowFormCode"
+            type="submit"
+            class="btn btn-primary button-submit"
+            [disabled]="!formPhone.controls.phone.valid"
+            (click)="onSubmit()">
+            Получить код</button>
     </form>
 </div>

@@ -24,18 +24,13 @@ export class AuthorizationComponent implements OnDestroy {
   });
 
   constructor(private authService: AuthService, private wsService: WebSocketService) {
+    this.authService.register('').subscribe();
     this.wsService.connect();
   }
 
   public onSubmit() {
     const phone = `${this.code}${this.formPhone.value.phone}`;
-
-    this.authService.register(phone).subscribe(
-      () => {
-        this.wsService.emitPhone(phone);
-      },
-      (error) => console.log(error),
-    );
+    this.wsService.emitPhone(phone);
 
     this.wsService.asObservable.subscribe((response) => {
       this.isShowFormCode = response;
