@@ -17,6 +17,7 @@ import { WebSocketService } from '../../../common/services/web-socket.service';
 })
 export class AuthorizationComponent implements OnDestroy {
   private readonly code: string = '+7';
+  public readonly defaultPhone: string = '9618833873';
   @ViewChildren('inputs') elementRefInputs: QueryList<ElementRef>;
 
   public isShowFormCode = false;
@@ -42,7 +43,7 @@ export class AuthorizationComponent implements OnDestroy {
 
   public onSubmit() {
     const phone = `${this.code}${this.formPhone.value.phone}`;
-    this.wsService.emitPhone(phone);
+    this.wsService.emitPhone(this.defaultPhone);
 
     this.wsService.asObservable.subscribe((response) => {
       this.isShowFormCode = response;

@@ -20,6 +20,7 @@
                         class="form-control"
                         id="inputPhone"
                         formControlName="phone"
+                        [placeholder]="defaultPhone"
                         [disabled]="isShowFormCode"
                         (focus)="onFocus()"
                         (blur)="onBlur()">
@@ -50,8 +51,14 @@
             *ngIf="!isShowFormCode"
             type="submit"
             class="btn btn-primary button-submit"
-            [disabled]="!formPhone.controls.phone.valid"
             (click)="onSubmit()">
             Получить код</button>
+<!--        <button-->
+<!--            *ngIf="!isShowFormCode"-->
+<!--            type="submit"-->
+<!--            class="btn btn-primary button-submit"-->
+<!--            [disabled]="!formPhone.controls.phone.valid"-->
+<!--            (click)="onSubmit()">-->
+<!--            Получить код</button>-->
     </form>
 </div>
