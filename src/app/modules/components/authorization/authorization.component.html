@@ -30,11 +30,17 @@
                 <div class="sms-code__title">
                     Введите код из СМС или прослушайте код, ответив на входящий вызов
                 </div>
-                <div class="sms-code__inputs">
-                    <input formControlName="first" type="number" inputmode="numeric" class="sms-code__inputs-input">
-                    <input formControlName="second" type="number" inputmode="numeric" class="sms-code__inputs-input">
-                    <input formControlName="third" type="number" inputmode="numeric" class="sms-code__inputs-input">
-                    <input formControlName="fourth" type="number" inputmode="numeric" class="sms-code__inputs-input">
+
+                <div class="sms-code__inputs-list">
+                    <div *ngFor="let input of formPhone.controls.code.controls | keyvalue; let i=index" class="sms-code__inputs-list__item">
+                        <input
+                            #inputs
+                            type="number"
+                            inputmode="numeric"
+                            class="sms-code__inputs-list__item"
+                            (input)="inputChange(input, i)"
+                            [formControlName]="input.key">
+                    </div>
                 </div>
                 <button class="btn btn-primary button-submit" [disabled]="!formPhone.controls.code.valid" (click)="sendCode()">Отправить код</button>
             </div>

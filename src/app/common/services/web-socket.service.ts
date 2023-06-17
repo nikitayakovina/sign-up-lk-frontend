@@ -16,12 +16,13 @@ export class WebSocketService {
     },
   };
 
-  constructor(private socket: Socket) {}
+  constructor(private readonly socket: Socket) {
+    this.socket = new Socket(this.config);
+    this.destroy();
+    this.socket.connect();
+  }
 
   public connect() {
-    this.socket = new Socket(this.config);
-    this.socket.connect();
-
     this.socket.emit('connection', {
       socket: this.socket,
     });

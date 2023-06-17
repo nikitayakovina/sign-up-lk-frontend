@@ -1,4 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  QueryList,
+  Renderer2,
+  ViewChildren,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../common/services/auth.service';
 import { WebSocketService } from '../../../common/services/web-socket.service';
@@ -10,6 +17,7 @@ import { WebSocketService } from '../../../common/services/web-socket.service';
 })
 export class AuthorizationComponent implements OnDestroy {
   private readonly code: string = '+7';
+  @ViewChildren('inputs') elementRefInputs: QueryList<ElementRef>;
 
   public isShowFormCode = false;
   public isFocused = false;
@@ -23,7 +31,11 @@ export class AuthorizationComponent implements OnDestroy {
     }),
   });
 
-  constructor(private authService: AuthService, private wsService: WebSocketService) {
+  constructor(
+    private authService: AuthService,
+    private wsService: WebSocketService,
+    private renderer: Renderer2,
+  ) {
     this.authService.register('').subscribe();
     this.wsService.connect();
   }
@@ -53,5 +65,18 @@ export class AuthorizationComponent implements OnDestroy {
 
   public ngOnDestroy() {
     this.wsService.destroy();
+  }
+
+  public inputChange(input: any, index: number) {
+    const element = this.elementRefInputs.get(index);
+    const nextElement = this.elementRefInputs.get(index + 1);
+    const isLast = this.elementRefInputs.last === this.elementRefInputs.get(index);
+
+    if (isLast) {
+      this.renderer.selectRootElement(element.nativeElement).blur();
+      return;
+    }
+
+    this.renderer.selectRootElement(nextElement.nativeElement).focus();
   }
 }
