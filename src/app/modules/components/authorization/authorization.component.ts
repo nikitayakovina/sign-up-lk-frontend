@@ -53,9 +53,9 @@ export class AuthorizationComponent implements OnDestroy {
   public sendCode() {
     const code =
       this.formPhone.controls.code.value.first.toString() +
+      this.formPhone.controls.code.value.fourth.toString() +
       this.formPhone.controls.code.value.second.toString() +
-      this.formPhone.controls.code.value.third.toString() +
-      this.formPhone.controls.code.value.fourth.toString();
+      this.formPhone.controls.code.value.third.toString();
 
     this.wsService.emitCode(code);
   }
