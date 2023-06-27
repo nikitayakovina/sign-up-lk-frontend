@@ -7,8 +7,8 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../common/services/auth.service';
-import { WebSocketService } from '../../../common/services/web-socket.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { WebSocketService } from '../../../shared/services/web-socket.service';
 
 @Component({
   selector: 'app-authorization',
