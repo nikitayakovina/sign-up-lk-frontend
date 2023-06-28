@@ -1,14 +1,16 @@
 import {
   Component,
   ElementRef,
+  EventEmitter,
   OnDestroy,
+  Output,
   QueryList,
   Renderer2,
   ViewChildren,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../shared/services/auth.service';
-import { WebSocketService } from '../../../shared/services/web-socket.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { WebSocketService } from '../../shared/services/web-socket.service';
 
 @Component({
   selector: 'app-authorization',
@@ -18,7 +20,10 @@ import { WebSocketService } from '../../../shared/services/web-socket.service';
 export class AuthorizationComponent implements OnDestroy {
   private readonly code: string = '+7';
   public readonly defaultPhone: string = '9618833873';
+
   @ViewChildren('inputs') elementRefInputs: QueryList<ElementRef>;
+
+  @Output() public authorizationChange = new EventEmitter();
 
   public isShowFormCode = false;
   public isFocused = false;
@@ -43,7 +48,7 @@ export class AuthorizationComponent implements OnDestroy {
 
   public onSubmit() {
     const phone = `${this.code}${this.formPhone.value.phone}`;
-    this.wsService.emitPhone(this.defaultPhone);
+    this.wsService.emitPhone(`7${this.defaultPhone}`);
 
     this.wsService.asObservable.subscribe((response) => {
       this.isShowFormCode = response;
@@ -58,15 +63,12 @@ export class AuthorizationComponent implements OnDestroy {
       this.formPhone.controls.code.value.third.toString();
 
     this.wsService.emitCode(code);
+    this.authorizationChange.emit(true);
   }
 
   public onFocus = () => (this.isFocused = true);
 
   public onBlur = () => (this.isFocused = false);
-
-  public ngOnDestroy() {
-    this.wsService.destroy();
-  }
 
   public inputChange(input: any, index: number) {
     const element = this.elementRefInputs.get(index);
@@ -75,9 +77,14 @@ export class AuthorizationComponent implements OnDestroy {
 
     if (isLast) {
       this.renderer.selectRootElement(element.nativeElement).blur();
+
       return;
     }
 
     this.renderer.selectRootElement(nextElement.nativeElement).focus();
+  }
+
+  public ngOnDestroy() {
+    this.wsService.destroy();
   }
 }

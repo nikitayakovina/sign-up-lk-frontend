@@ -7,10 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './shared/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { AuthorizationComponent } from './modules/components/authorization/authorization.component';
+import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { environment } from '../environments/environment';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { PersonalAreaComponent } from './modules/components/personal-area/personal-area.component';
+import { PersonalAreaComponent } from './components/personal-area/personal-area.component';
+import { MainComponent } from './components/main/main.component';
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -19,7 +20,7 @@ const config: SocketIoConfig = {
   },
 };
 @NgModule({
-  declarations: [AppComponent, AuthorizationComponent, PersonalAreaComponent],
+  declarations: [AppComponent, AuthorizationComponent, PersonalAreaComponent, MainComponent],
   imports: [
     BrowserModule,
     FormsModule,
