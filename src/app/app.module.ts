@@ -10,7 +10,6 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { environment } from '../environments/environment';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { PersonalAreaComponent } from './modules/personal-area/components/personal-area/personal-area.component';
 import { MainComponent } from './components/main/main.component';
 
 const config: SocketIoConfig = {

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PersonalAreaComponent } from './components/personal-area/personal-area.component';
+import { PersonalAreaMainComponent } from './components/personal-area-main/personal-area-main.component';
 import { PersonalAreaRoutingModule } from './personal-area-routing.module';
 
 @NgModule({
-  declarations: [PersonalAreaComponent],
+  declarations: [PersonalAreaMainComponent],
   imports: [CommonModule, PersonalAreaRoutingModule],
 })
 export class PersonalAreaModule {}

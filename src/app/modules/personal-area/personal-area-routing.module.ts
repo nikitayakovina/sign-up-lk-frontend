@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PersonalAreaComponent } from './components/personal-area/personal-area.component';
+import { PersonalAreaMainComponent } from './components/personal-area-main/personal-area-main.component';
 
-const routes: Routes = [{ path: '', component: PersonalAreaComponent }];
+const routes: Routes = [{ path: '', component: PersonalAreaMainComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

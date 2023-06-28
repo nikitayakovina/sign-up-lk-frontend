@@ -8,12 +8,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent {
-  modalRef: BsModalRef;
+  public readonly headerPersonalArea = 'Личный кабинет';
+  public modalRef: BsModalRef;
   constructor(
     private modalService: BsModalService,
     private router: Router,
     private route: ActivatedRoute,
   ) {}
+
+  public get isOpenPersonalArea(): boolean {
+    return this.router.url === '/personal-area';
+  }
 
   private redirect() {
     this.router.navigate(['personal-area'], {

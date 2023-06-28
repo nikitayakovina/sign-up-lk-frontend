@@ -1,6 +1,9 @@
 <div class="content">
     <header class="header">
         <div class="header-logo"></div>
+        <div *ngIf="isOpenPersonalArea" class="header-name">
+            {{ headerPersonalArea }}
+        </div>
         <div class="header-links">
             <img class="header-links__authentication svg-icon" (click)="openModal(template)" src="./assets/img/sprite/authentication.svg">
         </div>
