@@ -1,0 +1,36 @@
+<div class="widgets__list">
+    <div *ngFor="let widget of widgets" class="widgets__list-item">
+        <div class="widgets__list-item__header">
+            <div class="widgets__list-item__header-name">
+                {{ widget.name }}
+            </div>
+            <div class="widgets__list-item__header-actions" (click)="removeWidget(widget)">
+                <img class="svg-icon" src="./assets/img/sprite/remove.svg">
+            </div>
+        </div>
+    </div>
+    <div class="widgets__list-item__add" (click)="modalService.openModal(modalAddWidget)">
+        <div class="widgets__list-item__add-btn">
+            <img class="svg-icon" src="./assets/img/sprite/add.svg">
+        </div>
+    </div>
+</div>
+
+<ng-template #modalAddWidget>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Добавление виджета</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalService.closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="list">
+            <div *ngFor="let widget of defaultWidgets.widgets" class="list__item" (click)="addWidget(widget)">
+                {{ widget.name }}
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="modalService.closeModal()">Добавить</button>
+    </div>
+</ng-template>

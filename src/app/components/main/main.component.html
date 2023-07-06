@@ -5,16 +5,16 @@
             {{ headerPersonalArea }}
         </div>
         <div class="header-links">
-            <img class="header-links__authentication svg-icon" (click)="openModal(template)" src="./assets/img/sprite/authentication.svg">
+            <img class="header-links__authentication svg-icon" (click)="modalService.openModal(modalAuthentication)" src="./assets/img/sprite/authentication.svg">
         </div>
     </header>
     <main></main>
 </div>
 
-<ng-template #template>
+<ng-template #modalAuthentication>
     <div class="modal-header">
         <h4 class="modal-title pull-left">Вход на сайт</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalService.closeModal()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -22,6 +22,6 @@
         <app-authorization (authorizationChange)="authorizationChange($event)"></app-authorization>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="modalRef.hide()">Закрыть</button>
+        <button type="button" class="btn btn-default" (click)="modalService.closeModal()">Закрыть</button>
     </div>
 </ng-template>

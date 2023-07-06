@@ -1,6 +1,6 @@
-import { Component, TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'app-main',
@@ -9,9 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MainComponent {
   public readonly headerPersonalArea = 'Личный кабинет';
-  public modalRef: BsModalRef;
   constructor(
-    private modalService: BsModalService,
+    public modalService: ModalService,
     private router: Router,
     private route: ActivatedRoute,
   ) {}
@@ -26,13 +25,9 @@ export class MainComponent {
     });
   }
 
-  public openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
   public authorizationChange(value: boolean) {
     if (value) {
-      this.modalRef.hide();
+      this.modalService.closeModal();
       this.redirect();
     }
   }

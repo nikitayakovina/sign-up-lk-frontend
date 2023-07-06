@@ -1,0 +1,62 @@
+.widgets__list {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-item {
+    background: yellow;
+    border-radius: 8px;
+    display: flex;
+    flex: 0 1 calc(50% - 30px);
+    margin: 0 15px 30px;
+    min-height: 200px;
+    padding: 19px 22px 26px 16px;
+    position: relative;
+
+    &__header {
+      display: flex;
+      width: 100%;
+
+      &-name {
+
+      }
+
+      &-actions {
+        margin-left: auto;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    &__add {
+      align-items: center;
+      border: 1px dashed #6e6cad;
+      border-radius: 10px;
+      color: #6e6cad;
+      cursor: pointer;
+      display: flex;
+      flex: 0 1 calc(50% - 30px);
+      flex-direction: column;
+      font-size: 15px;
+      justify-content: center;
+      line-height: 20px;
+      margin: 0 15px 30px;
+      min-height: 200px;
+    }
+  }
+}
+
+.list {
+  &__item {
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lightgray;
+    }
+  }
+}

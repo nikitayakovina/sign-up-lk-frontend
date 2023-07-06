@@ -11,6 +11,7 @@ import { AuthorizationComponent } from './components/authorization/authorization
 import { environment } from '../environments/environment';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MainComponent } from './components/main/main.component';
+import { ModalService } from './shared/services/modal.service';
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -29,7 +30,7 @@ const config: SocketIoConfig = {
     HttpClientModule,
     SocketIoModule.forRoot(config),
   ],
-  providers: [AuthService, BsModalService],
+  providers: [AuthService, BsModalService, ModalService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
