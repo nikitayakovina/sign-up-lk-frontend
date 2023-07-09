@@ -5,7 +5,11 @@
             {{ headerPersonalArea }}
         </div>
         <div class="header-links">
-            <img class="header-links__authentication svg-icon" (click)="modalService.openModal(modalAuthentication)" src="./assets/img/sprite/authentication.svg">
+            <img
+                class="header-links__authentication svg-icon"
+                [src]="isOpenPersonalArea ? './assets/img/sprite/exit.svg' : './assets/img/sprite/authentication.svg'"
+                [title]="isOpenPersonalArea ? 'Выход' : 'Вход'"
+                (click)="isOpenPersonalArea ? exit() : modalService.openModal(modalAuthentication)">
         </div>
     </header>
     <main></main>

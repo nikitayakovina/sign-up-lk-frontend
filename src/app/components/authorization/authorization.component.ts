@@ -62,8 +62,9 @@ export class AuthorizationComponent implements OnDestroy {
       this.formPhone.controls.code.value.second.toString() +
       this.formPhone.controls.code.value.third.toString();
 
-    this.wsService.emitCode(code);
-    this.authorizationChange.emit(true);
+    this.wsService.emitCode(code).subscribe((response) => {
+      this.authorizationChange.emit(response);
+    });
   }
 
   public onFocus = () => (this.isFocused = true);

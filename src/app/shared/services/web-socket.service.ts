@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Socket, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from '../../../environments/environment';
 import { Observable, Subject } from 'rxjs';
+import { IToken } from '../interfaces/token.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,7 @@ import { Observable, Subject } from 'rxjs';
 export class WebSocketService {
   private storage: boolean;
   private subject: Subject<boolean> = new Subject<boolean>();
+
   private readonly config: SocketIoConfig = {
     url: environment.url,
     options: {
@@ -16,7 +19,7 @@ export class WebSocketService {
     },
   };
 
-  constructor(private readonly socket: Socket) {
+  constructor(private readonly socket: Socket, private authService: AuthService) {
     this.socket = new Socket(this.config);
     this.destroy();
     this.socket.connect();
@@ -41,6 +44,20 @@ export class WebSocketService {
   public emitCode(code: string) {
     this.socket.emit('verificationCode', {
       code,
+    });
+
+    return new Observable((result) => {
+      this.socket.on('authToken', (response: IToken) => {
+        if (response.success && response?.token) {
+          this.authService.handle({
+            username: response.token.msg,
+            token: response.token.token,
+          });
+          result.next(true);
+        } else {
+          result.next(false);
+        }
+      });
     });
   }
 

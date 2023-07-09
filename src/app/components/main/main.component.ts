@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '../../shared/services/modal.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -13,6 +14,7 @@ export class MainComponent {
     public modalService: ModalService,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthService,
   ) {}
 
   public get isOpenPersonalArea(): boolean {
@@ -27,8 +29,17 @@ export class MainComponent {
 
   public authorizationChange(value: boolean) {
     if (value) {
-      this.modalService.closeModal();
       this.redirect();
+      this.modalService.closeModal();
+    } else {
+      alert('Ошибка входа');
     }
+  }
+
+  public exit(): void {
+    this.authService.logout();
+    this.router.navigate([''], {
+      relativeTo: this.route,
+    });
   }
 }
