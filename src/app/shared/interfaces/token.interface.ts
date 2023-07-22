@@ -1,7 +1,7 @@
 export interface IToken {
   success: boolean;
-  token: {
-    msg: string;
+  userData: {
+    id: string;
     token: string;
   };
 }

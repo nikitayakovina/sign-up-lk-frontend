@@ -30,8 +30,26 @@ export class AuthService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
+  public checkUser(id: string) {}
+
   public logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.http
+      .delete(this.rootURL + `/authorization-control/delete`, {
+        body: {
+          params: {
+            id: currentUser.id,
+          },
+        },
+      })
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            localStorage.removeItem('currentUser');
+            this.currentUserSubject.next(null);
+          }
+        },
+        error: (error) => alert(error),
+      });
   }
 }

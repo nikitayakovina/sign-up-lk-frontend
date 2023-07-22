@@ -32,8 +32,8 @@ export class WebSocketService {
   }
 
   public emitPhone(phone: string) {
-    // @ts-ignore
-    this.socket.on('phoneProcessed', (response) => {
+    this.socket.on('authenticationProcess', (response: any) => {
+      // тут сразу делать запуск таймера
       this.handle(response.success);
     });
     this.socket.emit('phone', {
@@ -48,10 +48,10 @@ export class WebSocketService {
 
     return new Observable((result) => {
       this.socket.on('authToken', (response: IToken) => {
-        if (response.success && response?.token) {
+        if (response.success && response.userData) {
           this.authService.handle({
-            username: response.token.msg,
-            token: response.token.token,
+            id: response.userData.id,
+            token: response.userData.token,
           });
           result.next(true);
         } else {
