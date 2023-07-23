@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
-import { DeleteService } from '../../../../open-api/services/delete.service';
-import { Delete } from '../../../../open-api/models/delete';
+import { DeleteService } from '../../api/open-api/services/delete.service';
+import { Delete } from '../../api/open-api/models/delete';
 
 @Injectable()
 export class AuthService {
