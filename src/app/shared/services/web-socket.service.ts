@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from '../../../environments/environment';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IToken } from '../interfaces/token.interface';
 import { AuthService } from './auth.service';
 
@@ -19,10 +19,15 @@ export class WebSocketService {
     },
   };
 
+  public redirectSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+  public verificationSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
   constructor(private readonly socket: Socket, private authService: AuthService) {
     this.socket = new Socket(this.config);
-    this.destroy();
+    // доделать проверку если сокет уже открыт
+    // if (!this.socket.ioSocket?.connected) {
     this.socket.connect();
+    // }
   }
 
   public connect() {
@@ -32,10 +37,23 @@ export class WebSocketService {
   }
 
   public emitPhone(phone: string) {
+    /* Если сессия есть в базе то запрос смс кода не делаем -> сразу делаем redirect */
+    this.socket.on('verificationSession', (response: any) => {
+      if (response.success) {
+        this.authService.handle({
+          id: response.userData.id,
+          token: response.userData.token,
+        });
+
+        this.redirectSubject$.next(true);
+      }
+    });
+
     this.socket.on('authenticationProcess', (response: any) => {
       // тут сразу делать запуск таймера
       this.handle(response.success);
     });
+
     this.socket.emit('phone', {
       phone,
     });
@@ -46,18 +64,23 @@ export class WebSocketService {
       code,
     });
 
-    return new Observable((result) => {
-      this.socket.on('authToken', (response: IToken) => {
-        if (response.success && response.userData) {
-          this.authService.handle({
-            id: response.userData.id,
-            token: response.userData.token,
-          });
-          result.next(true);
-        } else {
-          result.next(false);
-        }
-      });
+    // Вывод "Неправильный код"
+    this.socket.on('verificationCode', (response: any) => {
+      if (!response.success) {
+        this.verificationSubject$.next(false);
+      }
+    });
+
+    this.socket.on('authToken', (response: IToken) => {
+      if (response.success && response.userData) {
+        this.authService.handle({
+          id: response.userData.id,
+          token: response.userData.token,
+        });
+        this.redirectSubject$.next(true);
+      } else {
+        this.redirectSubject$.next(false);
+      }
     });
   }
 
@@ -76,7 +99,10 @@ export class WebSocketService {
   }
 
   public destroy() {
-    this.socket.disconnect();
-    this.socket.removeAllListeners();
+    // почитать про дисконект сокетов
+    // this.socket.disconnect();
+    // this.socket.removeAllListeners();
+
+    this.redirectSubject$.next(null);
   }
 }

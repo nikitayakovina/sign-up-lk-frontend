@@ -3,6 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
+  // возможно придется использовать onpush, потому что при выходе не происходит редирект
+  // {
+  //   path: '',
+  //   redirectTo: '/personal-area',
+  //   pathMatch: 'full',
+  //   canActivateChild: [AuthGuard],
+  // },
   {
     path: 'personal-area',
     canActivateChild: [AuthGuard],

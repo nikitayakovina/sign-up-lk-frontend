@@ -36,17 +36,20 @@ export class AuthService {
 
   public logout() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.authorizationControlService
-      .apiAuthorizationControlDeleteDelete({
-        body: {
-          id: currentUser.id,
-        },
-      })
-      .subscribe((response: Delete) => {
-        if (response.success) {
-          localStorage.removeItem('currentUser');
-          this.currentUserSubject.next(null);
-        }
-      });
+
+    if (currentUser?.id) {
+      this.authorizationControlService
+        .apiAuthorizationControlDeleteDelete({
+          body: {
+            id: currentUser.id,
+          },
+        })
+        .subscribe((response: Delete) => {
+          if (response.success) {
+            localStorage.removeItem('currentUser');
+            this.currentUserSubject.next(null);
+          }
+        });
+    }
   }
 }
