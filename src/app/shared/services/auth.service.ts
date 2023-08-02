@@ -4,13 +4,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { DeleteService } from '../../api/open-api/services/delete.service';
 import { Delete } from '../../api/open-api/models/delete';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   private readonly rootURL = '/api';
   private currentUserSubject: BehaviorSubject<IUser>;
   public currentUser: Observable<IUser>;
-  constructor(private http: HttpClient, private authorizationControlService: DeleteService) {
+  constructor(
+    private http: HttpClient,
+    private authorizationControlService: DeleteService,
+    private router: Router,
+  ) {
     this.currentUserSubject = new BehaviorSubject<IUser>(
       JSON.parse(localStorage.getItem('currentUser')),
     );
@@ -48,8 +53,11 @@ export class AuthService {
           if (response.success) {
             localStorage.removeItem('currentUser');
             this.currentUserSubject.next(null);
+            this.router.navigate(['user', 'auth']);
           }
         });
+    } else {
+      this.router.navigate(['user', 'auth']);
     }
   }
 }

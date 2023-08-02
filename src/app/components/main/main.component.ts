@@ -20,18 +20,24 @@ export class MainComponent {
   ) {
     this.wsService.redirectSubject$.subscribe((response) => {
       if (response) {
-        this.modalService.closeModal();
+        // this.modalService.closeModal();
         this.redirect();
       }
     });
   }
 
   public get isOpenPersonalArea(): boolean {
-    return this.router.url === '/personal-area';
+    return this.router.url === '/user/personal-area';
   }
 
   private redirect() {
-    this.router.navigate(['personal-area'], {
+    this.router.navigate(['user', 'personal-area'], {
+      relativeTo: this.route,
+    });
+  }
+
+  public login(): void {
+    this.router.navigate(['user', 'auth'], {
       relativeTo: this.route,
     });
   }
