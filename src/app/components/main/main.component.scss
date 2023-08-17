@@ -20,3 +20,14 @@
     }
   }
 }
+
+.loader {
+  height: 100%;
+  background-color: gray;
+  position: absolute;
+  width: 100%;
+  opacity: 0.3;
+  &-spinner {
+    align-self: center;
+  }
+}

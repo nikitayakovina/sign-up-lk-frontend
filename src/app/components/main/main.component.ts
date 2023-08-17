@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '../../shared/services/modal.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { WebSocketService } from '../../shared/services/web-socket.service';
+import { LoaderService } from '../../shared/services/loader.service';
 
 @Component({
   selector: 'app-main',
@@ -11,12 +12,14 @@ import { WebSocketService } from '../../shared/services/web-socket.service';
 })
 export class MainComponent {
   public readonly headerPersonalArea = 'Личный кабинет';
+  public loader = this.loaderService.loading$;
   constructor(
     public modalService: ModalService,
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private wsService: WebSocketService,
+    private loaderService: LoaderService,
   ) {
     this.wsService.redirectSubject$.subscribe((response) => {
       if (response) {

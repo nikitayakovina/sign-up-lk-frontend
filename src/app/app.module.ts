@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MainComponent } from './components/main/main.component';
 import { ModalService } from './shared/services/modal.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -22,6 +23,7 @@ const config: SocketIoConfig = {
 @NgModule({
   declarations: [AppComponent, AuthorizationComponent, MainComponent],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,

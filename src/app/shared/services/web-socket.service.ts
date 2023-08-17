@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IToken } from '../interfaces/token.interface';
 import { AuthService } from './auth.service';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,11 @@ export class WebSocketService {
   public redirectSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   public verificationSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
 
-  constructor(private readonly socket: Socket, private authService: AuthService) {
+  constructor(
+    private readonly socket: Socket,
+    private authService: AuthService,
+    private loaderService: LoaderService,
+  ) {
     this.socket = new Socket(this.config);
     // доделать проверку если сокет уже открыт
     // if (!this.socket.ioSocket?.connected) {
@@ -68,6 +73,7 @@ export class WebSocketService {
     this.socket.on('verificationCode', (response: any) => {
       if (!response.success) {
         this.verificationSubject$.next(false);
+        this.loaderService.finish();
       }
     });
 
@@ -81,6 +87,8 @@ export class WebSocketService {
       } else {
         this.redirectSubject$.next(false);
       }
+
+      this.loaderService.finish();
     });
   }
 

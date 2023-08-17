@@ -12,6 +12,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { WebSocketService } from '../../shared/services/web-socket.service';
+import { LoaderService } from '../../shared/services/loader.service';
 
 @Component({
   selector: 'app-authorization',
@@ -47,6 +48,7 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private wsService: WebSocketService,
     private renderer: Renderer2,
+    private loaderService: LoaderService,
   ) {
     /* Показ "Неправильный код" */
     this.wsService.verificationSubject$.subscribe((response) => {
@@ -85,16 +87,21 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit() {
+    this.loaderService.start();
+
     this.resetFormPhone();
 
     this.wsService.emitPhone(`7${this.defaultPhone}`);
 
     this.wsService.asObservable.subscribe((response) => {
       this.isShowFormCode = response;
+      this.loaderService.finish();
     });
   }
 
   public sendCode() {
+    this.loaderService.start();
+
     const code =
       this.formPhone.controls.code.value.first.toString() +
       this.formPhone.controls.code.value.fourth.toString() +
