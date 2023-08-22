@@ -4,12 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './common/services/auth.service';
+import { AuthService } from './shared/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { AuthorizationComponent } from './modules/components/authorization/authorization.component';
+import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { environment } from '../environments/environment';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { MainComponent } from './components/main/main.component';
+import { ModalService } from './shared/services/modal.service';
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -18,7 +20,7 @@ const config: SocketIoConfig = {
   },
 };
 @NgModule({
-  declarations: [AppComponent, AuthorizationComponent],
+  declarations: [AppComponent, AuthorizationComponent, MainComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -28,7 +30,7 @@ const config: SocketIoConfig = {
     HttpClientModule,
     SocketIoModule.forRoot(config),
   ],
-  providers: [AuthService, BsModalService],
+  providers: [AuthService, BsModalService, ModalService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

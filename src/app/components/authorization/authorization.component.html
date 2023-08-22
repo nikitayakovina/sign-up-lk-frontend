@@ -8,7 +8,7 @@
             <div class="phone-number" [class.phone-number-active]="isFocused">
                 <div class="phone-number__country">
                     <div class="phone-number__country-container">
-                        <img class="svg-icon" src="./assets/img/sprite/russia.svg">
+                        <img class="svg-icon" src="../../../assets/img/sprite/russia.svg">
                         <div class="phone-number__country-container__code">
                             <span>+7</span>
                         </div>
@@ -20,6 +20,7 @@
                         class="form-control"
                         id="inputPhone"
                         formControlName="phone"
+                        [placeholder]="defaultPhone"
                         [disabled]="isShowFormCode"
                         (focus)="onFocus()"
                         (blur)="onBlur()">
@@ -38,20 +39,35 @@
                             type="number"
                             inputmode="numeric"
                             class="sms-code__inputs-list__item"
-                            (input)="inputChange(input, i)"
+                            (input)="inputChange(i, $event)"
                             [formControlName]="input.key">
                     </div>
                 </div>
+
+                <div class="sms-code__timer">
+                    <span>Получить новый код можно через: 00:{{ time }}</span>
+                </div>
+
+                <div *ngIf="isShowIncorrect" class="sms-code__incorrect">
+                    <span>Неправильный код</span>
+                </div>
+
+<!--                <button *ngIf="isSendCode" class="btn btn-primary button-submit" [disabled]="!formPhone.controls.code.valid" (click)="sendCode()">Отправить код</button>-->
                 <button class="btn btn-primary button-submit" [disabled]="!formPhone.controls.code.valid" (click)="sendCode()">Отправить код</button>
             </div>
-
         </div>
         <button
             *ngIf="!isShowFormCode"
             type="submit"
             class="btn btn-primary button-submit"
-            [disabled]="!formPhone.controls.phone.valid"
             (click)="onSubmit()">
-            Получить код</button>
+            {{ isRetryCode ? 'Получить код заново' : 'Получить код' }}</button>
+<!--        <button-->
+<!--            *ngIf="!isShowFormCode"-->
+<!--            type="submit"-->
+<!--            class="btn btn-primary button-submit"-->
+<!--            [disabled]="!formPhone.controls.phone.valid"-->
+<!--            (click)="onSubmit()">-->
+<!--            Получить код</button>-->
     </form>
 </div>
