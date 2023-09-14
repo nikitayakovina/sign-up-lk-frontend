@@ -1,1 +1,29 @@
-<p>personal-area-settings works!</p>
+<form [formGroup]="formSettings">
+    <div class="form-group">
+        <div>
+            <label for="inputFio">Введите ФИО</label>
+        </div>
+        <div class="form-group__fio">
+            <input
+                type="text"
+                class="form-control"
+                id="inputFio"
+                formControlName="fio">
+        </div>
+        <div>
+            <label for="inputFio">Введите номер телефона</label>
+        </div>
+        <div class="form-group__phone">
+            <input
+                type="text"
+                class="form-control"
+                id="inputPhone"
+                formControlName="phone">
+        </div>
+    </div>
+    <button
+        type="submit"
+        class="btn btn-primary button-submit"
+        [disabled]="!formSettings.valid">
+        Сохранить</button>
+</form>
