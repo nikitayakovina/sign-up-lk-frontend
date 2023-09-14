@@ -1,12 +1,18 @@
 <div class="profile">
     <div class="profile__header"></div>
-    <div class="profile__sidebar">
-        <div class="profile__sidebar-user"></div>
-        <div class="profile__sidebar-menu"></div>
-    </div>
-    <div class="profile__main">
-        <div class="profile__main-content">
-            <app-widgets [widgets]="widgets"></app-widgets>
-        </div>
-    </div>
+    <tabset [vertical]="true" type="pills">
+        <tab *ngFor="let item of itemsMenu" [heading]="item.title" [ngSwitch]="item.id">
+            <ng-container *ngSwitchCase="ItemsMenuEnum.main">
+                <div class="profile__main">
+                    <div class="profile__main-content">
+                        <app-widgets [widgets]="widgets"></app-widgets>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="ItemsMenuEnum.settings">
+                <span>test</span>
+            </ng-container>
+        </tab>
+    </tabset>
 </div>

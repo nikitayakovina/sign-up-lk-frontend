@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IWidgets } from '../../../../shared/interfaces/widgets.interface';
+import { ItemsMenuEnum } from '../../enums/personal-area.enum';
 
 @Component({
   selector: 'app-personal-area-main',
@@ -17,5 +18,18 @@ export class PersonalAreaMainComponent {
       name: 'Тест2',
     },
   ];
+
+  public itemsMenu = [
+    {
+      title: 'Главная',
+      id: ItemsMenuEnum.main,
+    },
+    {
+      title: 'Настройки',
+      id: ItemsMenuEnum.settings,
+    },
+  ];
   constructor() {}
+
+  protected readonly ItemsMenuEnum = ItemsMenuEnum;
 }
