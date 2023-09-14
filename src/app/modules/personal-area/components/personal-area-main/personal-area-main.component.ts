@@ -28,6 +28,10 @@ export class PersonalAreaMainComponent {
       title: 'Настройки',
       id: ItemsMenuEnum.settings,
     },
+    {
+      title: 'Календарь',
+      id: ItemsMenuEnum.calendar,
+    },
   ];
   constructor() {}
 
