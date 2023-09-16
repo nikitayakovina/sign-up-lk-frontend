@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
-import { DeleteService } from '../../api/open-api/services/delete.service';
-import { Delete } from '../../api/open-api/models/delete';
 import { Router } from '@angular/router';
+import { AuthorizationControlService } from '../../api/open-api/services/authorization-control.service';
+import { DeleteSession } from '../../api/open-api/models/delete-session';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
   public currentUser: Observable<IUser>;
   constructor(
     private http: HttpClient,
-    private authorizationControlService: DeleteService,
+    private authorizationControlService: AuthorizationControlService,
     private router: Router,
   ) {
     this.currentUserSubject = new BehaviorSubject<IUser>(
@@ -44,12 +44,12 @@ export class AuthService {
 
     if (currentUser?.id) {
       this.authorizationControlService
-        .apiAuthorizationControlDeleteDelete({
+        .apiAuthorizationControlDelete({
           body: {
             id: currentUser.id,
           },
         })
-        .subscribe((response: Delete) => {
+        .subscribe((response: DeleteSession) => {
           if (response.success) {
             localStorage.removeItem('currentUser');
             this.currentUserSubject.next(null);
