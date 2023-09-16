@@ -1,5 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface Delete {
+export interface UpdateUserDataResponse {
   success?: boolean;
 }

@@ -1,3 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
-export { Delete } from './models/delete';
+export { AuthorizationOntrol } from './models/authorization-ontrol';
+export { DeleteSession } from './models/delete-session';
+export { ServiceItem } from './models/service-item';
+export { SpecializationParametersResponse } from './models/specialization-parameters-response';
+export { GetSearchServiceSettingsResponse } from './models/get-search-service-settings-response';
+export { GetSearchServiceSettingsRequest } from './models/get-search-service-settings-request';
+export { PostSearchServiceSettingsResponse } from './models/post-search-service-settings-response';
+export { PostSearchServiceSettingsRequest } from './models/post-search-service-settings-request';
+export { UpdateUserDataRequest } from './models/update-user-data-request';
+export { UpdateUserDataResponse } from './models/update-user-data-response';

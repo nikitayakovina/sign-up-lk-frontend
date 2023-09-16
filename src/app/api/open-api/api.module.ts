@@ -4,7 +4,9 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { DeleteService } from './services/delete.service';
+import { AuthorizationControlService } from './services/authorization-control.service';
+import { RequestForSpecializationParametersService } from './services/request-for-specialization-parameters.service';
+import { SettingsService } from './services/settings.service';
 
 /**
  * Module that provides all services and configuration.
@@ -14,7 +16,9 @@ import { DeleteService } from './services/delete.service';
   exports: [],
   declarations: [],
   providers: [
-    DeleteService,
+    AuthorizationControlService,
+    RequestForSpecializationParametersService,
+    SettingsService,
     ApiConfiguration
   ],
 })
