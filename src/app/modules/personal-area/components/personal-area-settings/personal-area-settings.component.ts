@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { PersonalAreaSettingsService } from '../../services/personal-area-settings.service';
 import { IUser } from '../../../../shared/interfaces/user.interface';
+import { GetSearchServiceSettingsResponse } from '../../../../api/open-api/models/get-search-service-settings-response';
 
 @Component({
   selector: 'app-personal-area-settings',
@@ -11,6 +12,8 @@ import { IUser } from '../../../../shared/interfaces/user.interface';
 })
 export class PersonalAreaSettingsComponent implements OnInit {
   private currentUser = this.authService.currentUserValue as IUser;
+
+  public userSettings: GetSearchServiceSettingsResponse;
 
   public formSettings = new FormGroup({
     fio: new FormControl('', Validators.required),
@@ -26,8 +29,8 @@ export class PersonalAreaSettingsComponent implements OnInit {
   }
 
   public fetchData() {
-    this.personalAreaSettingsService.fetchData(this.currentUser.id).subscribe((result) => {
-      console.log(result);
+    this.personalAreaSettingsService.fetchData(this.currentUser.id).subscribe((response) => {
+      this.userSettings = response;
     });
   }
 
