@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
-import { AuthorizationControlService } from '../../api/open-api/services/authorization-control.service';
 import { DeleteSession } from '../../api/open-api/models/delete-session';
+import { AuthenticationService } from '../../api/open-api/services/authentication.service';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
   public currentUser: Observable<IUser>;
   constructor(
     private http: HttpClient,
-    private authorizationControlService: AuthorizationControlService,
+    private authorizationControlService: AuthenticationService,
     private router: Router,
   ) {
     this.currentUserSubject = new BehaviorSubject<IUser>(
@@ -40,14 +40,12 @@ export class AuthService {
   public checkUser(id: string) {}
 
   public logout() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const token = '';
 
-    if (currentUser?.id) {
+    if (token) {
       this.authorizationControlService
-        .apiAuthorizationControlDelete({
-          body: {
-            id: currentUser.id,
-          },
+        .apiAuthenticationDelete({
+          token,
         })
         .subscribe((response: DeleteSession) => {
           if (response.success) {
