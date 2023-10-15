@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUser } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
 import { DeleteSession } from '../../api/open-api/models/delete-session';
@@ -9,14 +9,14 @@ import { AuthenticationService } from '../../api/open-api/services/authenticatio
 @Injectable()
 export class AuthService {
   private readonly rootURL = '/api';
-  private currentUserSubject: BehaviorSubject<IUser>;
-  public currentUser: Observable<IUser>;
+  private currentUserSubject: BehaviorSubject<string>;
+  public currentUser: Observable<string>;
   constructor(
     private http: HttpClient,
     private authorizationControlService: AuthenticationService,
     private router: Router,
   ) {
-    this.currentUserSubject = new BehaviorSubject<IUser>(
+    this.currentUserSubject = new BehaviorSubject<string>(
       JSON.parse(localStorage.getItem('currentUser')),
     );
     this.currentUser = this.currentUserSubject.asObservable();
@@ -32,9 +32,9 @@ export class AuthService {
     });
   }
 
-  public handle(user: IUser) {
-    this.currentUserSubject.next(user);
-    localStorage.setItem('currentUser', JSON.stringify(user));
+  public handle(token: string) {
+    this.currentUserSubject.next(token);
+    localStorage.setItem('currentUser', JSON.stringify(token));
   }
 
   public checkUser(id: string) {}
@@ -57,5 +57,20 @@ export class AuthService {
     } else {
       this.router.navigate(['user', 'auth']);
     }
+  }
+
+  public sendMessage(phone: string) {
+    return this.authorizationControlService
+      .apiAuthenticationSendMessagePost({
+        'phone-number': phone,
+      })
+      .pipe(tap((response) => {}));
+  }
+
+  public checkMessage(phone: string, code: string) {
+    return this.authorizationControlService.apiAuthenticationCheckMessagePost({
+      'phone-number': phone,
+      'verification-code': code,
+    });
   }
 }

@@ -31,7 +31,7 @@ export class WebSocketService {
     this.socket = new Socket(this.config);
     // доделать проверку если сокет уже открыт
     // if (!this.socket.ioSocket?.connected) {
-    this.socket.connect();
+    // this.socket.connect();
     // }
   }
 
@@ -43,16 +43,16 @@ export class WebSocketService {
 
   public emitPhone(phone: string) {
     /* Если сессия есть в базе то запрос смс кода не делаем -> сразу делаем redirect */
-    this.socket.on('verificationSession', (response: any) => {
-      if (response.success) {
-        this.authService.handle({
-          id: response.userData.id,
-          token: response.userData.token,
-        });
-
-        this.redirectSubject$.next(true);
-      }
-    });
+    // this.socket.on('verificationSession', (response: any) => {
+    //   if (response.success) {
+    //     this.authService.handle({
+    //       id: response.userData.id,
+    //       token: response.userData.token,
+    //     });
+    //
+    //     this.redirectSubject$.next(true);
+    //   }
+    // });
 
     this.socket.on('authenticationProcess', (response: any) => {
       // тут сразу делать запуск таймера
@@ -64,33 +64,33 @@ export class WebSocketService {
     });
   }
 
-  public emitCode(code: string) {
-    this.socket.emit('verificationCode', {
-      code,
-    });
-
-    // Вывод "Неправильный код"
-    this.socket.on('verificationCode', (response: any) => {
-      if (!response.success) {
-        this.verificationSubject$.next(false);
-        this.loaderService.finish();
-      }
-    });
-
-    this.socket.on('authToken', (response: IToken) => {
-      if (response.success && response.userData) {
-        this.authService.handle({
-          id: response.userData.id,
-          token: response.userData.token,
-        });
-        this.redirectSubject$.next(true);
-      } else {
-        this.redirectSubject$.next(false);
-      }
-
-      this.loaderService.finish();
-    });
-  }
+  // public emitCode(code: string) {
+  //   this.socket.emit('verificationCode', {
+  //     code,
+  //   });
+  //
+  //   // Вывод "Неправильный код"
+  //   this.socket.on('verificationCode', (response: any) => {
+  //     if (!response.success) {
+  //       this.verificationSubject$.next(false);
+  //       this.loaderService.finish();
+  //     }
+  //   });
+  //
+  //   this.socket.on('authToken', (response: IToken) => {
+  //     if (response.success && response.userData) {
+  //       this.authService.handle({
+  //         id: response.userData.id,
+  //         token: response.userData.token,
+  //       });
+  //       this.redirectSubject$.next(true);
+  //     } else {
+  //       this.redirectSubject$.next(false);
+  //     }
+  //
+  //     this.loaderService.finish();
+  //   });
+  // }
 
   public handle = (value: boolean) => {
     this.storage = value;
