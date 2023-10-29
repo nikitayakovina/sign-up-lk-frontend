@@ -10,6 +10,10 @@ import { AuthenticationService } from '../../api/open-api/services/authenticatio
 export class AuthService {
   private readonly rootURL = '/api';
   private currentUserSubject: BehaviorSubject<string>;
+
+  public redirectSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+  public verificationSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+
   public currentUser: Observable<string>;
   constructor(
     private http: HttpClient,
@@ -40,23 +44,18 @@ export class AuthService {
   public checkUser(id: string) {}
 
   public logout() {
-    const token = '';
-
-    if (token) {
-      this.authorizationControlService
-        .apiAuthenticationDelete({
-          token,
-        })
-        .subscribe((response: DeleteSession) => {
-          if (response.success) {
-            localStorage.removeItem('currentUser');
-            this.currentUserSubject.next(null);
-            this.router.navigate(['user', 'auth']);
-          }
-        });
-    } else {
-      this.router.navigate(['user', 'auth']);
-    }
+    console.log(this.currentUserValue);
+    this.authorizationControlService
+      .apiAuthenticationDelete({
+        token: this.currentUserValue,
+      })
+      .subscribe((response: DeleteSession) => {
+        if (response.success) {
+          localStorage.removeItem('currentUser');
+          this.currentUserSubject.next(null);
+          this.router.navigate(['user', 'auth']);
+        }
+      });
   }
 
   public sendMessage(phone: string) {
@@ -72,5 +71,9 @@ export class AuthService {
       'phone-number': phone,
       'verification-code': code,
     });
+  }
+
+  public destroy() {
+    this.redirectSubject$.next(null);
   }
 }

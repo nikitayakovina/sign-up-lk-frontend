@@ -21,7 +21,7 @@ export class MainComponent {
     private wsService: WebSocketService,
     private loaderService: LoaderService,
   ) {
-    this.wsService.redirectSubject$.subscribe((response) => {
+    this.authService.redirectSubject$.subscribe((response) => {
       if (response) {
         // this.modalService.closeModal();
         this.redirect();

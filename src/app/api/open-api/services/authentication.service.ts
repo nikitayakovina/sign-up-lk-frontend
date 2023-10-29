@@ -51,6 +51,7 @@ export class AuthenticationService extends BaseService {
  * успешно ли выполнен запрос
  */
 'success'?: boolean;
+'data'?: any;
 }>> {
     const rb = new RequestBuilder(this.rootUrl, AuthenticationService.ApiAuthenticationSendMessagePostPath, 'post');
     if (params) {
@@ -68,6 +69,7 @@ export class AuthenticationService extends BaseService {
          * успешно ли выполнен запрос
          */
         'success'?: boolean;
+        'data'?: any;
         }>;
       })
     );
@@ -98,6 +100,7 @@ export class AuthenticationService extends BaseService {
  * успешно ли выполнен запрос
  */
 'success'?: boolean;
+'data'?: any;
 }> {
     return this.apiAuthenticationSendMessagePost$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
@@ -106,12 +109,14 @@ export class AuthenticationService extends BaseService {
  * успешно ли выполнен запрос
  */
 'success'?: boolean;
+'data'?: any;
 }>): {
 
 /**
  * успешно ли выполнен запрос
  */
 'success'?: boolean;
+'data'?: any;
 } => r.body)
     );
   }

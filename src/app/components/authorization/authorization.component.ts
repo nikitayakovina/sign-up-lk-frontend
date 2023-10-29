@@ -13,6 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { WebSocketService } from '../../shared/services/web-socket.service';
 import { LoaderService } from '../../shared/services/loader.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-authorization',
@@ -90,17 +91,17 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
     this.loaderService.start();
     this.resetFormPhone();
 
-    // this.wsService.emitPhone(`7${this.defaultPhone}`);
-    this.authService.sendMessage(`7${this.defaultPhone}`).subscribe((response) => {
-      console.log(response);
-      this.isShowFormCode = response.success;
-      this.loaderService.finish();
-    });
+    this.authService
+      .sendMessage(`7${this.defaultPhone}`)
+      .pipe(finalize(() => this.loaderService.finish()))
+      .subscribe((response) => {
+        if (response.data !== null) {
+          this.authService.handle(response.data.token);
+          this.authService.redirectSubject$.next(true);
+        }
 
-    // this.wsService.asObservable.subscribe((response) => {
-    //   this.isShowFormCode = response;
-    //   this.loaderService.finish();
-    // });
+        this.isShowFormCode = response.success;
+      });
   }
 
   public sendCode() {
@@ -112,8 +113,15 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
       this.formPhone.controls.code.value.second.toString() +
       this.formPhone.controls.code.value.third.toString();
 
-    this.authService.checkMessage(`7${this.defaultPhone}`, code).subscribe((response) => {});
-    // this.wsService.emitCode(code);
+    this.authService
+      .checkMessage(`7${this.defaultPhone}`, code)
+      .pipe(finalize(() => this.loaderService.finish()))
+      .subscribe((response) => {
+        if (response.data !== null) {
+          this.authService.handle(response.data.token);
+          this.authService.redirectSubject$.next(true);
+        }
+      });
 
     this.resetFormPhone();
   }
@@ -156,7 +164,7 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.wsService.destroy();
+    this.authService.destroy();
     clearInterval(this.interval);
   }
 }
