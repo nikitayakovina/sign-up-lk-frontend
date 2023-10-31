@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IWidgets } from '../../../../shared/interfaces/widgets.interface';
+import { IWidgets } from '../../../shared/interfaces/widgets.interface';
 import { ItemsMenuEnum } from '../../enums/personal-area.enum';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-area-main',
@@ -33,7 +34,17 @@ export class PersonalAreaMainComponent {
       id: ItemsMenuEnum.calendar,
     },
   ];
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  public redirect() {
+    this.router.navigate(['./calendar'], {
+      relativeTo: this.route,
+      skipLocationChange: true,
+    });
+    // this.router.navigate(['calendar'], {
+    //   relativeTo: this.route,
+    // });
+  }
 
   protected readonly ItemsMenuEnum = ItemsMenuEnum;
 }

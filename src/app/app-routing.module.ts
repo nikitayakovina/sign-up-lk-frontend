@@ -21,7 +21,7 @@ const routes: Routes = [
         path: 'personal-area',
         canActivateChild: [AuthGuard],
         loadChildren: () =>
-          import('./modules/personal-area/personal-area.module').then((m) => m.PersonalAreaModule),
+          import('./personal-area/personal-area.module').then((m) => m.PersonalAreaModule),
       },
     ],
   },

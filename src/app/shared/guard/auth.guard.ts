@@ -19,6 +19,7 @@ export class AuthGuard implements CanActivateChild {
       return true;
     }
 
+    // TODO: добавить редирект на страницу логина
     // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
