@@ -1,22 +1,10 @@
-<div class="profile">
-    <div class="profile__header"></div>
+<div class="personal__area">
+<!--    <div class="personal__area-header"></div>-->
     <tabset [vertical]="true" type="pills">
         <tab *ngFor="let item of itemsMenu" [heading]="item.title" [ngSwitch]="item.id">
-            <ng-container *ngSwitchCase="ItemsMenuEnum.main">
-                <div class="profile__main">
-                    <div class="profile__main-content">
-                        <app-widgets [widgets]="widgets"></app-widgets>
-                    </div>
-                </div>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="ItemsMenuEnum.settings">
-                <app-settings></app-settings>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="ItemsMenuEnum.calendar">
-                <app-calendar></app-calendar>
-            </ng-container>
+            <app-widgets *ngSwitchCase="ItemsMenuEnum.main" [widgets]="widgets"></app-widgets>
+            <app-settings *ngSwitchCase="ItemsMenuEnum.settings"></app-settings>
+            <app-calendar *ngSwitchCase="ItemsMenuEnum.calendar"></app-calendar>
         </tab>
     </tabset>
 </div>

@@ -1,0 +1,48 @@
+.wizard {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    background-color: #1e1f21;
+    color: #dcdddd;
+    padding: 16px;
+  }
+  &__date {
+    span {
+      font-size: 32px;
+      &:nth-child(1) {
+        font-weight: bold;
+        margin-right: 8px;
+
+      }
+      //&:nth-child(2) {
+      //  font-size: 32px;
+      //}
+      &:nth-child(3) {
+        font-weight: bold;
+        margin-right: 8px;
+      }
+
+    }
+  }
+}
+
+//const ButtonsWrapper = styled("div")`
+//display: flex;
+//align-items: center;
+//`;
+//
+//const ButtonWrapper = styled("button")`
+//border: unset;
+//background-color: #565759;
+//height: 20px;
+//margin-right: 2px;
+//border-radius: 4px;
+//color: #e6e6e6;
+//outline: unset;
+//cursor: pointer;
+//`;
+//
+//const TodayButton = styled(ButtonWrapper)`
+//padding: 0 16px;
+//font-weight: bold;
+//`;

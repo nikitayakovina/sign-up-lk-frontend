@@ -1,24 +1,12 @@
-.content {
-  margin: 10px;
-
-  .header {
-    display: flex;
-    width: 100%;
-
-    &-logo {
-
-    }
-
-    &-links {
+header {
+  display: flex;
+  justify-content: space-between;
+    > img {
       margin-left: auto;
-
-      &__authentication {
-        cursor: pointer;
-        width: 25px;
-        height: 25px;
-      }
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
     }
-  }
 }
 
 .loader {

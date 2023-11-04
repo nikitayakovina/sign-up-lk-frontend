@@ -1,58 +1,20 @@
-.profile {
-  height: 100%;
-  min-width: 100% !important;
-  background-color: white;
-  display: flex;
-
-  &__header {
-
+.personal__area {
+  background-color: #ccc;
+  padding: 10px;
+  height: 100vh;
+}
+:host ::ng-deep  {
+  .tab-container {
+    display: flex;
+    //min-width: 100%;
   }
-
-  &__sidebar {
-    width: 284px;
+  .nav {
+    flex-grow: 0.2;
     flex-shrink: 0;
-    margin-right: 25px;
-
-    &-user {
-
-    }
-
-    &-menu {
-      display: flex;
-      flex-direction: column;
-
-      &__item {
-
-      }
-    }
+    border-right: 1px solid black;
   }
-
-  &__main {
-    flex-grow: 1;
-    max-width: calc(100% - 249px);
-
-    &-content {
-
-    }
+  .tab-content {
+    flex-grow: 2;
   }
 }
 
-:host ::ng-deep .tab-container {
-  display: flex;
-  min-width: 100%;
-}
-
-:host ::ng-deep .nav {
-  width: 250px;
-  flex-shrink: 0;
-  border: 1px solid black;
-}
-
-:host ::ng-deep .tab-content {
-  flex-grow: 1;
-  min-width: 100%;
-
-  .tab-pane {
-    min-height: 100%;
-  }
-}
