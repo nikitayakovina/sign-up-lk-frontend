@@ -1,0 +1,64 @@
+.grid__items {
+  &-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 1px;
+    background-color: #4D4C4D;
+    border-bottom: 1px solid #4D4C4D
+  }
+  &-header {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-gap: 1px;
+    background-color: #1E1F21;
+    border-bottom: 1px solid #4D4C4D;
+  }
+  &-weekNameCell {
+    min-width: 145.61px;
+    min-height: 24px;
+    background-color: #1E1F21;
+    color: #DDDCDD;
+
+    &>div {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+  }
+  &__itemCell {
+    min-width: 140px;
+    min-height: 80px;
+    background-color: #1E1F21;
+    color: #555759;
+    &-weekend {
+      background-color: #272829;
+      color: #555759;
+    }
+    &-selectedMonth {
+      background-color: #1E1F21;
+      color: #DDDCDD;
+    }
+    &-weekendMonth {
+      background-color: #272829;
+      color: #9F9FA1;
+    }
+  }
+  &-day {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 8px;
+  }
+  &-current {
+    height: 33px;
+    width: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f00;
+    border-radius: 50%;
+    padding: 0;
+    margin: 2px 2px 2px auto;
+  }
+}

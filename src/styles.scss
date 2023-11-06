@@ -2,39 +2,43 @@
 @import "styles/global/icons";
 @import "styles/variables";
 @import "styles/mixins";
-
+*,
+*::before,
+*::after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 * {
+    padding: 0;
+    margin: 0;
+    border: 0;
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
-
     /* Firefox */
     input[type=number] {
         -moz-appearance: textfield;
     }
 }
-
-html, body {
-    margin: 0;
-    height: 100%;
-    background: url('./assets/img/main.jpg') no-repeat center center fixed;
-    background-size: cover;
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-::ng-deep .modal-content {
-    border: 0;
-}
-
-.modal-header {
-    .close {
-        border: none;
-        background-color: white;
-    }
-}
-
-.modal-body {
-    padding: 0;
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }
