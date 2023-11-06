@@ -1,13 +1,13 @@
 <div class="wizard__wrapper">
         <div class="wizard__date">
-            <span>ноябрь </span>
-            <span>2023 </span>
+            <span>{{objectCurrentMonth.m}} </span>
+            <span>{{objectCurrentMonth.y}} </span>
             <span>г.</span>
         </div>
 
-<!--        <ButtonsWrapper>-->
-<!--            <ButtonWrapper onClick={prevHandler}>&lt;</ButtonWrapper>{/* переписать на свой компонент btn*/}-->
-<!--            <TodayButton onClick={todayHandler}>сегодня</TodayButton>-->
-<!--            <ButtonWrapper onClick={nextHandler}>&gt;</ButtonWrapper>-->
-<!--        </ButtonsWrapper>-->
+        <div class="wizard__control">
+            <button (click)="onPrevClick()">&lt;</button>
+            <button (click)="onTodayClick()">сегодня</button>
+            <button (click)="onNextClick()">&gt;</button>
+        </div>
 </div>
