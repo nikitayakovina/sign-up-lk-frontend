@@ -1,5 +1,41 @@
+header {
+  display: flex;
+  justify-content: space-between;
+
+  > img {
+    margin-left: auto;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.loader {
+  height: 100%;
+  background-color: gray;
+  position: absolute;
+  width: 100%;
+  opacity: 0.3;
+
+  &-spinner {
+    align-self: center;
+  }
+}
+
 .app__wrapper {
   background-size: cover;
   height: 100%;
   padding: 10px;
+
+  &__container {
+    display: flex;
+
+    &__navbar {
+      border-right: 1px solid black;
+    }
+
+    &__main {
+      flex-grow: 1;
+    }
+  }
 }

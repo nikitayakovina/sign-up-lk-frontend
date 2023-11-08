@@ -10,9 +10,11 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { environment } from '../environments/environment';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { MainComponent } from './components/main/main.component';
 import { ModalService } from './shared/services/modal.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainComponent } from './components/main/main.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { WidgetsComponent } from './components/widgets/widgets.component';
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -21,7 +23,13 @@ const config: SocketIoConfig = {
   },
 };
 @NgModule({
-  declarations: [AppComponent, AuthorizationComponent, MainComponent],
+  declarations: [
+    AppComponent,
+    AuthorizationComponent,
+    MainComponent,
+    NavbarComponent,
+    WidgetsComponent,
+  ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

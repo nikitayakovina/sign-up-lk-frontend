@@ -1,0 +1,20 @@
+.navbar {
+  &__list {
+    list-style-type: none;
+    padding: 30px;
+
+    &__item {
+      @media (hover: hover) {
+        &:hover,
+        &:focus {
+          cursor: pointer;
+          background: cadetblue;
+        }
+      }
+    }
+  }
+}
+
+.selected {
+  background: cadetblue;
+}
