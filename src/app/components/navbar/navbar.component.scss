@@ -1,7 +1,8 @@
 .navbar {
   &__list {
     list-style-type: none;
-    padding: 30px;
+    padding: 0;
+    width: 100%;
 
     &__item {
       @media (hover: hover) {

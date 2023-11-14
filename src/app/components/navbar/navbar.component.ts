@@ -23,7 +23,7 @@ export class NavbarComponent {
     },
   ];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(public router: Router, private route: ActivatedRoute) {}
 
   public select(id: string) {
     this.router.navigate([id], {

@@ -11,15 +11,6 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivateChild: [AuthGuard],
   },
-  // {
-  //   path: 'user',
-  //   children: [
-  //     {
-  //       path: 'auth',
-  //       component: AuthorizationComponent,
-  //     },
-  //   ],
-  // },
   {
     path: 'auth',
     component: AuthorizationComponent,
