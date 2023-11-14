@@ -52,8 +52,5 @@ export class AppComponent {
 
   public exit(): void {
     this.authService.logout();
-    this.router.navigate([''], {
-      relativeTo: this.route,
-    });
   }
 }

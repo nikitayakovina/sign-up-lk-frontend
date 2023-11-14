@@ -44,7 +44,6 @@ export class AuthService {
   public checkUser(id: string) {}
 
   public logout() {
-    console.log(this.currentUserValue);
     this.authorizationControlService
       .apiAuthenticationDelete({
         token: this.currentUserValue,
