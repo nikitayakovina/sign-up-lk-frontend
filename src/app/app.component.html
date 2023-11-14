@@ -10,7 +10,7 @@
             (click)="currentUser ? exit() : login()">
     </header>
 
-    <div class="app__wrapper__container">
+    <div class="app__wrapper__container" [class.vh-100]="currentUser">
         <app-navbar *ngIf="currentUser" class="app__wrapper__container__navbar"></app-navbar>
 
         <main *ngIf="currentUser" class="app__wrapper__container__main">
