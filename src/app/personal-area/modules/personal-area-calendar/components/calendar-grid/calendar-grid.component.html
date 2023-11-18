@@ -1,9 +1,7 @@
-<div class="grid__items-wrapper">
-    <div class="grid__items-header">
-        <div class="grid__items-weekNameCell" *ngFor="let day of [0,1,2,3,4,5,6]">
-            <div>
-                {{ moment().day(day + 1).locale('ru').format('ddd') }}
-            </div>
+<div class="grid__items-header">
+    <div class="grid__items-weekNameCell" *ngFor="let day of [0,1,2,3,4,5,6]">
+        <div>
+            {{ moment().day(day + 1).locale('ru').format('ddd') }}
         </div>
     </div>
 </div>
@@ -17,7 +15,7 @@
     }">
         <div class="grid__items-day"
              [ngClass]="{ 'grid__items-current': isCurrentDay(day) }">
-                    {{ isCurrentDay(day) ? day.format('D') : day.format('D')}}
+            {{ isCurrentDay(day) ? day.format('D') : day.format('D')}}
         </div>
     </div>
 </div>

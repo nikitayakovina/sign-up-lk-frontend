@@ -11,6 +11,7 @@ export class CalendarGridComponent implements OnInit {
   private _totalDays: number;
   private _today: moment.Moment = moment();
   private _startWeek: moment.Moment = moment();
+  private _currentSelectedMonth = moment();
   @Input() public set totalDays(days: number) {
     if (this._totalDays !== days) {
       this._totalDays = days
@@ -19,6 +20,7 @@ export class CalendarGridComponent implements OnInit {
   @Input() public set today(today: moment.Moment) {
     if (!this._today.isSame(today, 'day')) {
       this._today = today.clone();
+      this._currentSelectedMonth = today.clone();
       this.switchingMonths();
     }
   }
@@ -53,7 +55,7 @@ export class CalendarGridComponent implements OnInit {
     return moment().isSame(day, "day");
   }
   public isSelectedMonth (day: moment.Moment) {
-    return moment().isSame(day, "month");
+    return this._currentSelectedMonth.isSame(day, "month");
   }
   protected readonly moment = moment;
 }
