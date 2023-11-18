@@ -23,14 +23,14 @@ export class CalendarComponent {
   }
   public handlePrevClick() {
     this._today.next(this.today.value.clone().subtract(1, 'month'));
-    this._startWeek.next(this.today.value.clone().startOf('month').startOf('week'))
+    this._startWeek.next(this.today.value.clone().startOf('month').startOf('week'));
   }
   public handleNextClick() {
     this._today.next(this.today.value.clone().add(1, 'month'));
     this._startWeek.next(this.today.value.clone().startOf('month').startOf('week'));
   }
   public handleTodayClick() {
-    this._today.next(moment())
+    this._today.next(moment());
     this._startWeek.next(this.today.value.clone().startOf('month').startOf('week'));
   }
   constructor() {}
