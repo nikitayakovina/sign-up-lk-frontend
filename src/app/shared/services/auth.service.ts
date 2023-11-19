@@ -44,7 +44,6 @@ export class AuthService {
   public checkUser(id: string) {}
 
   public logout() {
-    console.log(this.currentUserValue);
     this.authorizationControlService
       .apiAuthenticationDelete({
         token: this.currentUserValue,
@@ -53,7 +52,7 @@ export class AuthService {
         if (response.success) {
           localStorage.removeItem('currentUser');
           this.currentUserSubject.next(null);
-          this.router.navigate(['user', 'auth']);
+          this.router.navigate(['auth']);
         }
       });
   }

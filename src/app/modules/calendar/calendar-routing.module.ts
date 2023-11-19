@@ -8,4 +8,4 @@ const routes: Routes = [{ path: '', component: CalendarComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PersonalAreaCalendarRoutingModule {}
+export class CalendarRoutingModule {}

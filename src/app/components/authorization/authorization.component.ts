@@ -3,7 +3,6 @@ import {
   ElementRef,
   EventEmitter,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   Renderer2,
@@ -20,7 +19,7 @@ import { finalize } from 'rxjs';
   templateUrl: './authorization.component.html',
   styleUrls: ['./authorization.component.scss'],
 })
-export class AuthorizationComponent implements OnInit, OnDestroy {
+export class AuthorizationComponent implements OnDestroy {
   private interval: any = null;
   private readonly code: string = '+7';
   public readonly defaultPhone: string = '9618833812';
@@ -80,11 +79,6 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
         }
       }, 1000);
     });
-  }
-
-  public ngOnInit() {
-    this.authService.register('').subscribe();
-    this.wsService.connect();
   }
 
   public onSubmit() {
