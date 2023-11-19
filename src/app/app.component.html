@@ -1,2 +1,43 @@
-<app-main></app-main>
-<router-outlet></router-outlet>
+<div class="app__wrapper">
+    <header class="header">
+        <div class="header__title">
+            {{ headerPersonalArea }}
+        </div>
+        <img
+            class="header__exit svg-icon"
+            [src]="currentUser ? './assets/img/sprite/exit.svg' : './assets/img/sprite/authentication.svg'"
+            [title]="currentUser ? 'Выход' : 'Вход'"
+            (click)="currentUser ? exit() : login()">
+    </header>
+
+    <div class="app__wrapper__container" [class.vh-100]="currentUser">
+        <app-navbar *ngIf="currentUser" class="app__wrapper__container__navbar"></app-navbar>
+
+        <main *ngIf="currentUser" class="app__wrapper__container__main">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+
+    <!-- пример модалки -->
+
+    <!--<ng-template #modalAuthentication>-->
+    <!--    <div class="modal-calendar-header">-->
+    <!--        <h4 class="modal-title pull-left">Вход на сайт</h4>-->
+    <!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalService.closeModal()">-->
+    <!--            <span aria-hidden="true">&times;</span>-->
+    <!--        </button>-->
+    <!--    </div>-->
+    <!--    <div class="modal-body">-->
+    <!--        <app-authorization></app-authorization>-->
+    <!--    </div>-->
+    <!--    <div class="modal-footer">-->
+    <!--        <button type="button" class="btn btn-default" (click)="modalService.closeModal()">Закрыть</button>-->
+    <!--    </div>-->
+    <!--</ng-template>-->
+</div>
+
+<div *ngIf="loader | async" class="loader d-flex justify-content-center">
+    <span class="loader-spinner spinner-border spinner-border-md"></span>
+</div>
+
+<router-outlet *ngIf="!currentUser"></router-outlet>

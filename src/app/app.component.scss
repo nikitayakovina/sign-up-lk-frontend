@@ -1,0 +1,45 @@
+header {
+  display: flex;
+  justify-content: space-between;
+
+  > img {
+    margin-left: auto;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.loader {
+  height: 100%;
+  background-color: gray;
+  position: absolute;
+  width: 100%;
+  opacity: 0.3;
+
+  &-spinner {
+    align-self: center;
+  }
+}
+
+.app__wrapper {
+  background-size: cover;
+  padding: 10px;
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+    height: inherit;
+
+    &__navbar {
+      border-right: 1px solid black;
+      overflow: auto;
+      min-width: 150px;
+    }
+
+    &__main {
+      flex-grow: 1;
+      overflow: auto;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+<div class="calendar">
+    <calendar-header></calendar-header>
+    <calendar-wizard (prevClicked)="handlePrevClick()" (nextClicked)="handleNextClick()" (todayClicked)="handleTodayClick()" [today]="today.value.clone()"></calendar-wizard>
+    <calendar-grid [totalDays]="totalDays" [today]="today.value.clone()" [startWeek]="startWeek.value.clone()"></calendar-grid>
+</div>

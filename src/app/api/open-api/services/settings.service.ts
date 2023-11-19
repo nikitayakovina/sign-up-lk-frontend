@@ -30,7 +30,7 @@ export class SettingsService extends BaseService {
   static readonly ApiSettingsSearchServiceGetPath = '/api/settings/search-service';
 
   /**
-   * gолучение данных пользователя по ID.
+   * получение данных пользователя по ID.
    *
    *
    *
@@ -65,7 +65,7 @@ export class SettingsService extends BaseService {
   }
 
   /**
-   * gолучение данных пользователя по ID.
+   * получение данных пользователя по ID.
    *
    *
    *

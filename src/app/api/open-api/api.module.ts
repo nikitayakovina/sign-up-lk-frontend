@@ -4,7 +4,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { AuthorizationControlService } from './services/authorization-control.service';
+import { AuthenticationService } from './services/authentication.service';
 import { RequestForSpecializationParametersService } from './services/request-for-specialization-parameters.service';
 import { SettingsService } from './services/settings.service';
 
@@ -16,7 +16,7 @@ import { SettingsService } from './services/settings.service';
   exports: [],
   declarations: [],
   providers: [
-    AuthorizationControlService,
+    AuthenticationService,
     RequestForSpecializationParametersService,
     SettingsService,
     ApiConfiguration

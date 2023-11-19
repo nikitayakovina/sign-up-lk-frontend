@@ -1,54 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ModalService } from '../../shared/services/modal.service';
-import { AuthService } from '../../shared/services/auth.service';
-import { WebSocketService } from '../../shared/services/web-socket.service';
-import { LoaderService } from '../../shared/services/loader.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent {
-  public readonly headerPersonalArea = 'Личный кабинет';
-  public loader = this.loaderService.loading$;
-  constructor(
-    public modalService: ModalService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService,
-    private wsService: WebSocketService,
-    private loaderService: LoaderService,
-  ) {
-    this.wsService.redirectSubject$.subscribe((response) => {
-      if (response) {
-        // this.modalService.closeModal();
-        this.redirect();
-      }
-    });
-  }
-
-  public get isOpenPersonalArea(): boolean {
-    return this.router.url === '/user/personal-area';
-  }
-
-  private redirect() {
-    this.router.navigate(['user', 'personal-area'], {
-      relativeTo: this.route,
-    });
-  }
-
-  public login(): void {
-    this.router.navigate(['user', 'auth'], {
-      relativeTo: this.route,
-    });
-  }
-
-  public exit(): void {
-    this.authService.logout();
-    this.router.navigate([''], {
-      relativeTo: this.route,
-    });
-  }
-}
+export class MainComponent {}

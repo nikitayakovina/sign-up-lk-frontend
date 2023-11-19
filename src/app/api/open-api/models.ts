@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-export { AuthorizationOntrol } from './models/authorization-ontrol';
+export { SendMessageCode } from './models/send-message-code';
+export { CheckMessageCode } from './models/check-message-code';
 export { DeleteSession } from './models/delete-session';
 export { ServiceItem } from './models/service-item';
 export { SpecializationParametersResponse } from './models/specialization-parameters-response';
