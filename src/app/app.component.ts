@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalService } from './shared/services/modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -52,5 +52,14 @@ export class AppComponent {
 
   public exit(): void {
     this.authService.logout();
+  }
+
+  public authorizationSuccess(value: boolean): void {
+    if (value) {
+      this.modalService.closeModal();
+      this.router.navigate(['personal-area'], {
+        relativeTo: this.route,
+      });
+    }
   }
 }

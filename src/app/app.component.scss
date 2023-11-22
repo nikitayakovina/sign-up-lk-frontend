@@ -8,6 +8,15 @@ header {
     width: 25px;
     height: 25px;
   }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+
+    li {
+      margin-right: 10px;
+    }
+  }
 }
 
 .loader {

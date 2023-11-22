@@ -3,29 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { MainComponent } from './components/main/main.component';
+import { JournalComponent } from './components/journal/journal.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'main',
-    pathMatch: 'full',
-    canActivateChild: [AuthGuard],
-  },
-  {
-    path: 'auth',
-    component: AuthorizationComponent,
-  },
-  {
-    path: 'main',
     component: MainComponent,
   },
   {
-    path: 'calendar',
-    loadChildren: () => import('./modules/calendar/calendar.module').then((m) => m.CalendarModule),
+    path: 'journal',
+    component: JournalComponent,
   },
   {
-    path: 'settings',
-    loadChildren: () => import('./modules/settings/settings.module').then((m) => m.SettingsModule),
+    path: 'personal-area',
+    canActivateChild: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/personal-area/personal-area.module').then((m) => m.PersonalAreaModule),
   },
 ];
 

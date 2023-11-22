@@ -13,8 +13,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { ModalService } from './shared/services/modal.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './components/main/main.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { WidgetsComponent } from './components/widgets/widgets.component';
+import { JournalComponent } from './components/journal/journal.component';
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -23,13 +22,7 @@ const config: SocketIoConfig = {
   },
 };
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthorizationComponent,
-    MainComponent,
-    NavbarComponent,
-    WidgetsComponent,
-  ],
+  declarations: [AppComponent, AuthorizationComponent, MainComponent, JournalComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

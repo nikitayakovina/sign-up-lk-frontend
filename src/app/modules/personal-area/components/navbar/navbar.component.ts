@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavbarEnum } from '../../shared/enums/navbar.enum';
+import { NavbarEnum } from '../../../../shared/enums/navbar.enum';
+
+export interface INavbarItems {
+  title: string;
+  id: NavbarEnum;
+}
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +13,7 @@ import { NavbarEnum } from '../../shared/enums/navbar.enum';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  public itemsNavbar = [
+  public itemsNavbar: INavbarItems[] = [
     {
       title: 'Главная',
       id: NavbarEnum.main,
@@ -25,8 +30,8 @@ export class NavbarComponent {
 
   constructor(public router: Router, private route: ActivatedRoute) {}
 
-  public select(id: string) {
-    this.router.navigate([id], {
+  public select(item: INavbarItems) {
+    this.router.navigate([item.id], {
       relativeTo: this.route,
     });
   }

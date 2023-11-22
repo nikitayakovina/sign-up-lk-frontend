@@ -13,6 +13,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { WebSocketService } from '../../shared/services/web-socket.service';
 import { LoaderService } from '../../shared/services/loader.service';
 import { finalize } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-authorization',
@@ -27,7 +28,7 @@ export class AuthorizationComponent implements OnDestroy {
 
   @ViewChildren('inputs') elementRefInputs: QueryList<ElementRef>;
 
-  @Output() public authorizationChange = new EventEmitter();
+  @Output() public authorizationSuccess = new EventEmitter();
 
   public isShowFormCode = false;
   public isFocused = false;
@@ -49,6 +50,8 @@ export class AuthorizationComponent implements OnDestroy {
     private wsService: WebSocketService,
     private renderer: Renderer2,
     private loaderService: LoaderService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     /* Показ "Неправильный код" */
     this.wsService.verificationSubject$.subscribe((response) => {
@@ -91,7 +94,7 @@ export class AuthorizationComponent implements OnDestroy {
       .subscribe((response) => {
         if (response.data !== null) {
           this.authService.handle(response.data.token);
-          this.authService.redirectSubject$.next(true);
+          this.authorizationSuccess.next(true);
         }
 
         this.isShowFormCode = response.success;
@@ -113,7 +116,7 @@ export class AuthorizationComponent implements OnDestroy {
       .subscribe((response) => {
         if (response.data !== null) {
           this.authService.handle(response.data.token);
-          this.authService.redirectSubject$.next(true);
+          this.authorizationSuccess.next(true);
         }
       });
 

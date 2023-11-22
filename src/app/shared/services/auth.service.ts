@@ -52,7 +52,7 @@ export class AuthService {
         if (response.success) {
           localStorage.removeItem('currentUser');
           this.currentUserSubject.next(null);
-          this.router.navigate(['auth']);
+          this.router.navigate(['']);
         }
       });
   }

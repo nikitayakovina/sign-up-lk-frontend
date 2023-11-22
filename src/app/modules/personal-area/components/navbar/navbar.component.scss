@@ -5,6 +5,8 @@
     width: 100%;
 
     &__item {
+      text-align: center;
+
       @media (hover: hover) {
         &:hover,
         &:focus {

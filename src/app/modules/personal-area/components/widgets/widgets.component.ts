@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ModalService } from '../../shared/services/modal.service';
-import { IWidgets } from '../../shared/interfaces/widgets.interface';
-import { Widget } from '../../shared/models/widget';
+import { ModalService } from '../../../../shared/services/modal.service';
+import { IWidgets } from '../../../../shared/interfaces/widgets.interface';
+import { Widget } from '../../../../shared/models/widget';
 
 @Component({
   selector: 'app-widgets',
