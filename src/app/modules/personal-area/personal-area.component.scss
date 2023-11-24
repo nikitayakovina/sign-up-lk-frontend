@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+
+  &__navbar {
+    min-width: 150px;
+    border-right: 1px solid lightgray;
+
+  }
+
+  &__content {
+    padding: 10px;
+    flex-grow: 1;
+  }
+}

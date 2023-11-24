@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../../shared/services/auth.service';
 import { PersonalAreaSettingsService } from '../../services/personal-area-settings.service';
-import { IUser } from '../../../../../../shared/interfaces/user.interface';
 import { GetSearchServiceSettingsResponse } from '../../../../../../api/open-api/models/get-search-service-settings-response';
 
 @Component({
@@ -11,7 +10,7 @@ import { GetSearchServiceSettingsResponse } from '../../../../../../api/open-api
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-  private currentUser = this.authService.currentUserValue as IUser;
+  private currentUser = this.authService.currentUserValue as string;
 
   public userSettings: GetSearchServiceSettingsResponse;
 
@@ -29,7 +28,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public fetchData() {
-    this.personalAreaSettingsService.fetchData(this.currentUser.id).subscribe((response) => {
+    this.personalAreaSettingsService.fetchData(this.currentUser).subscribe((response) => {
       this.userSettings = response;
     });
   }
@@ -37,7 +36,7 @@ export class SettingsComponent implements OnInit {
   public submit() {
     this.personalAreaSettingsService
       .submitSettings({
-        userId: this.currentUser.id,
+        userId: this.currentUser,
         searchServiceUserData: {
           workPhoneNumber: '12312312',
         },
