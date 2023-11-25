@@ -1,12 +1,10 @@
 <div class="navbar">
     <ul class="navbar__list">
-        <li *ngFor="let item of itemsNavbar; let index=index"
+        <li *ngFor="let item of itemsNavbar"
             class="navbar__list__item"
-            (click)="select(item)">
+            [routerLink]="[item.id]"
+            routerLinkActive="selected">
             {{ item.title }}
         </li>
     </ul>
 </div>
-
-
-<!--[class.selected]="router.url === '/' + item.id"-->

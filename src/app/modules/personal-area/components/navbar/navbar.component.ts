@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarEnum } from '../../../../shared/enums/navbar.enum';
 
 export interface INavbarItems {
@@ -28,11 +27,5 @@ export class NavbarComponent {
     },
   ];
 
-  constructor(public router: Router, private route: ActivatedRoute) {}
-
-  public select(item: INavbarItems) {
-    this.router.navigate([item.id], {
-      relativeTo: this.route,
-    });
-  }
+  constructor() {}
 }
