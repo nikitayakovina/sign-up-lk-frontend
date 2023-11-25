@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { IUser } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
 import { DeleteSession } from '../../api/open-api/models/delete-session';
 import { AuthenticationService } from '../../api/open-api/services/authentication.service';
@@ -26,22 +25,14 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): string | IUser {
+  public get currentUserValue(): string {
     return this.currentUserSubject.value ?? localStorage.getItem('currentUser');
-  }
-
-  public register(phone: string): Observable<any> {
-    return this.http.post(this.rootURL + `/authentication`, {
-      phone,
-    });
   }
 
   public handle(token: string) {
     this.currentUserSubject.next(token);
     localStorage.setItem('currentUser', JSON.stringify(token));
   }
-
-  public checkUser(id: string) {}
 
   public logout() {
     this.authorizationControlService
