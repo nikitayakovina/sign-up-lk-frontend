@@ -1,4 +1,4 @@
-header {
+.header {
   display: flex;
   justify-content: space-between;
 
@@ -9,12 +9,19 @@ header {
     height: 25px;
   }
 
-  ul {
+  &__navbar {
     list-style-type: none;
     display: flex;
 
-    li {
+    &__item {
       margin-right: 10px;
+
+      @media (hover: hover) {
+        &:hover,
+        &:focus {
+          cursor: pointer;
+        }
+      }
     }
   }
 }
@@ -51,4 +58,9 @@ header {
       overflow: auto;
     }
   }
+}
+
+.active {
+  color: cadetblue;
+  font-weight: 500;
 }

@@ -183,7 +183,7 @@ class QueryParameter extends Parameter {
 }
 
 /**
- * A parameter in the HTTP request calendar-header
+ * A parameter in the HTTP request header
  */
 class HeaderParameter extends Parameter {
   constructor(name: string, value: any, options: ParameterOptions) {
@@ -236,7 +236,7 @@ export class RequestBuilder {
   }
 
   /**
-   * Sets a calendar-header parameter
+   * Sets a header parameter
    */
   header(name: string, value: any, options?: ParameterOptions): void {
     this._header.set(name, new HeaderParameter(name, value, options || {}));

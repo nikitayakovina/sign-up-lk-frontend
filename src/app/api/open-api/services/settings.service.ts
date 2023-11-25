@@ -12,9 +12,6 @@ import { RequestBuilder } from '../request-builder';
 
 import { GetSearchServiceSettingsResponse } from '../models/get-search-service-settings-response';
 import { PostSearchServiceSettingsRequest } from '../models/post-search-service-settings-request';
-import { PostSearchServiceSettingsResponse } from '../models/post-search-service-settings-response';
-import { UpdateUserDataRequest } from '../models/update-user-data-request';
-import { UpdateUserDataResponse } from '../models/update-user-data-response';
 
 
 /**
@@ -30,7 +27,7 @@ export class SettingsService extends BaseService {
   static readonly ApiSettingsSearchServiceGetPath = '/api/settings/search-service';
 
   /**
-   * получение данных пользователя по ID.
+   * получение данных пользователя.
    *
    *
    *
@@ -41,17 +38,13 @@ export class SettingsService extends BaseService {
    */
   apiSettingsSearchServiceGet$Response(
     params: {
-
-    /**
-     * id пользователя
-     */
-      userId: string;
+      token: any;
     },
     context?: HttpContext
   ): Observable<StrictHttpResponse<GetSearchServiceSettingsResponse>> {
     const rb = new RequestBuilder(this.rootUrl, SettingsService.ApiSettingsSearchServiceGetPath, 'get');
     if (params) {
-      rb.query('userId', params.userId, {});
+      rb.header('token', params.token, {});
     }
 
     return this.http.request(
@@ -65,7 +58,7 @@ export class SettingsService extends BaseService {
   }
 
   /**
-   * получение данных пользователя по ID.
+   * получение данных пользователя.
    *
    *
    *
@@ -76,71 +69,12 @@ export class SettingsService extends BaseService {
    */
   apiSettingsSearchServiceGet(
     params: {
-
-    /**
-     * id пользователя
-     */
-      userId: string;
+      token: any;
     },
     context?: HttpContext
   ): Observable<GetSearchServiceSettingsResponse> {
     return this.apiSettingsSearchServiceGet$Response(params, context).pipe(
       map((r: StrictHttpResponse<GetSearchServiceSettingsResponse>): GetSearchServiceSettingsResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `apiSettingsSearchServicePut()` */
-  static readonly ApiSettingsSearchServicePutPath = '/api/settings/search-service';
-
-  /**
-   * обновление данных пользователя.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiSettingsSearchServicePut()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  apiSettingsSearchServicePut$Response(
-    params: {
-      body: UpdateUserDataRequest
-    },
-    context?: HttpContext
-  ): Observable<StrictHttpResponse<UpdateUserDataResponse>> {
-    const rb = new RequestBuilder(this.rootUrl, SettingsService.ApiSettingsSearchServicePutPath, 'put');
-    if (params) {
-      rb.body(params.body, 'application/json');
-    }
-
-    return this.http.request(
-      rb.build({ responseType: 'json', accept: 'application/json', context })
-    ).pipe(
-      filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<UpdateUserDataResponse>;
-      })
-    );
-  }
-
-  /**
-   * обновление данных пользователя.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiSettingsSearchServicePut$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  apiSettingsSearchServicePut(
-    params: {
-      body: UpdateUserDataRequest
-    },
-    context?: HttpContext
-  ): Observable<UpdateUserDataResponse> {
-    return this.apiSettingsSearchServicePut$Response(params, context).pipe(
-      map((r: StrictHttpResponse<UpdateUserDataResponse>): UpdateUserDataResponse => r.body)
     );
   }
 
@@ -159,12 +93,18 @@ export class SettingsService extends BaseService {
    */
   apiSettingsSearchServicePost$Response(
     params: {
+
+    /**
+     * Токен авторизации пользователя
+     */
+      token: any;
       body: PostSearchServiceSettingsRequest
     },
     context?: HttpContext
-  ): Observable<StrictHttpResponse<PostSearchServiceSettingsResponse>> {
+  ): Observable<StrictHttpResponse<any>> {
     const rb = new RequestBuilder(this.rootUrl, SettingsService.ApiSettingsSearchServicePostPath, 'post');
     if (params) {
+      rb.header('token', params.token, {});
       rb.body(params.body, 'application/json');
     }
 
@@ -173,7 +113,7 @@ export class SettingsService extends BaseService {
     ).pipe(
       filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<PostSearchServiceSettingsResponse>;
+        return r as StrictHttpResponse<any>;
       })
     );
   }
@@ -190,12 +130,17 @@ export class SettingsService extends BaseService {
    */
   apiSettingsSearchServicePost(
     params: {
+
+    /**
+     * Токен авторизации пользователя
+     */
+      token: any;
       body: PostSearchServiceSettingsRequest
     },
     context?: HttpContext
-  ): Observable<PostSearchServiceSettingsResponse> {
+  ): Observable<any> {
     return this.apiSettingsSearchServicePost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<PostSearchServiceSettingsResponse>): PostSearchServiceSettingsResponse => r.body)
+      map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
 

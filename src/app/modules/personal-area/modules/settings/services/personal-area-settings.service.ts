@@ -12,12 +12,14 @@ export class PersonalAreaSettingsService {
   constructor(private settingsService: SettingsService) {}
 
   public fetchData(userId: string): Observable<GetSearchServiceSettingsResponse> {
-    return this.settingsService.apiSettingsSearchServiceGet({ userId });
+    console.log(userId);
+    return this.settingsService.apiSettingsSearchServiceGet({ token: userId });
   }
 
   public submitSettings(
+    token: string,
     body: PostSearchServiceSettingsRequest,
   ): Observable<PostSearchServiceSettingsResponse> {
-    return this.settingsService.apiSettingsSearchServicePost({ body });
+    return this.settingsService.apiSettingsSearchServicePost({ token, body });
   }
 }

@@ -161,7 +161,6 @@ export class AuthorizationComponent implements OnDestroy {
   }
 
   public ngOnDestroy() {
-    this.authService.destroy();
     clearInterval(this.interval);
   }
 }

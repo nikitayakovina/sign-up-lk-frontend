@@ -35,11 +35,8 @@ export class SettingsComponent implements OnInit {
 
   public submit() {
     this.personalAreaSettingsService
-      .submitSettings({
-        userId: this.currentUser,
-        searchServiceUserData: {
-          workPhoneNumber: '12312312',
-        },
+      .submitSettings(this.currentUser, {
+        workPhoneNumber: '113333333',
       })
       .subscribe((response) => console.log(response));
   }

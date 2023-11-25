@@ -1,11 +1,12 @@
 <div class="app__wrapper">
     <header class="header">
-        <div *ngIf="currentUser" class="header__title">
-            <p>{{ headerPersonalArea }}</p>
-        </div>
-        <ul>
-            <li><a [routerLink]="['']">Главная</a></li>
-            <li><a [routerLink]="['/journal']">Журнал</a></li>
+        <ul class="header__navbar">
+            <li *ngFor="let router of routerLink"
+                class="header__navbar__item"
+                routerLinkActive="active"
+                [routerLink]="router.route">
+                {{ router.title }}
+            </li>
         </ul>
         <img
             class="header__exit svg-icon"

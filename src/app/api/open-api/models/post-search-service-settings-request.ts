@@ -1,64 +1,57 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface PostSearchServiceSettingsRequest {
-  searchServiceUserData: {
 
-/**
- * активность пользователя в поисковом сервисе
- */
-'activeAccount'?: boolean;
+  /**
+   * активность пользователя в поисковом сервисе
+   */
+  activeAccount?: boolean;
 
-/**
- * список социальных сетей пользователя
- */
-'socialNetwork'?: Array<string>;
+  /**
+   * список дополнительных услуг пользователя
+   */
+  additionalServices?: Array<string>;
 
-/**
- * рабочий номер телефона пользователя
- */
-'workPhoneNumber'?: string;
+  /**
+   * адреса пользователя
+   */
+  address?: Array<string>;
 
-/**
- * имя пользователя
- */
-'firstName'?: string;
+  /**
+   * имя пользователя
+   */
+  firstName?: string;
 
-/**
- * фамилия пользователя
- */
-'lastName'?: string;
+  /**
+   * фамилия пользователя
+   */
+  lastName?: string;
 
-/**
- * список услуг пользователя
- */
-'userServices'?: Array<{
+  /**
+   * список социальных сетей пользователя
+   */
+  socialNetwork?: Array<string>;
+
+  /**
+   * ник Telegram пользователя
+   */
+  telegram?: string;
+
+  /**
+   * список услуг пользователя
+   */
+  userServices?: Array<{
 'service'?: string;
 'price'?: string;
 }>;
 
-/**
- * список дополнительных услуг пользователя
- */
-'additionalServices'?: Array<string>;
-
-/**
- * адреса пользователя
- */
-'address'?: Array<string>;
-
-/**
- * номер WhatsApp пользователя
- */
-'whatsapp'?: string;
-
-/**
- * ник Telegram пользователя
- */
-'telegram'?: string;
-};
+  /**
+   * номер WhatsApp пользователя
+   */
+  whatsapp?: string;
 
   /**
-   * id пользователя
+   * рабочий номер телефона пользователя
    */
-  userId: string;
+  workPhoneNumber?: string;
 }

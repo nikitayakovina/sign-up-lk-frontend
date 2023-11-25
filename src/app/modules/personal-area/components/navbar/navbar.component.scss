@@ -11,14 +11,12 @@
         &:hover,
         &:focus {
           cursor: pointer;
-          font-weight: 500;
         }
       }
     }
   }
 }
 
-.selected {
+.active {
   background: cadetblue;
-  font-weight: 500;
 }

@@ -10,9 +10,6 @@ export class AuthService {
   private readonly rootURL = '/api';
   private currentUserSubject: BehaviorSubject<string>;
 
-  public redirectSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-  public verificationSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-
   public currentUser: Observable<string>;
   constructor(
     private http: HttpClient,
@@ -61,9 +58,5 @@ export class AuthService {
       'phone-number': phone,
       'verification-code': code,
     });
-  }
-
-  public destroy() {
-    this.redirectSubject$.next(null);
   }
 }
