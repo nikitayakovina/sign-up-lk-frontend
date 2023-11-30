@@ -2,7 +2,6 @@
   display: flex;
   height: 100vh;
   overflow: hidden;
-  border-top: 1px solid lightgray;
 
   &__navbar {
     min-width: 150px;
@@ -10,7 +9,6 @@
   }
 
   &__content {
-    padding: 10px;
     flex-grow: 1;
   }
 }

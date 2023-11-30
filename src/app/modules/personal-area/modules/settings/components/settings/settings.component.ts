@@ -2,25 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../../shared/services/auth.service';
 import { PersonalAreaSettingsService } from '../../services/personal-area-settings.service';
-import { GetSearchServiceSettingsResponse } from '../../../../../../api/open-api/models/get-search-service-settings-response';
+import {Store} from "@ngxs/store";
+import {AddSettings} from "../../../../../../store/actions/settings/settings.actions";
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css'],
+  styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
   private currentUser = this.authService.currentUserValue as string;
 
-  public userSettings: GetSearchServiceSettingsResponse;
-
   public formSettings = new FormGroup({
-    fio: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    workPhoneNumber: new FormControl('', Validators.required),
+    address: new FormControl([''], Validators.required),
+    telegram: new FormControl('', Validators.required),
   });
   constructor(
     private authService: AuthService,
     private personalAreaSettingsService: PersonalAreaSettingsService,
+    private store: Store
   ) {}
 
   public ngOnInit() {
@@ -29,14 +32,24 @@ export class SettingsComponent implements OnInit {
 
   public fetchData() {
     this.personalAreaSettingsService.fetchData(this.currentUser).subscribe((response) => {
-      this.userSettings = response;
+      this.formSettings.setValue({
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
+        workPhoneNumber: response.data.workPhoneNumber,
+        address: response.data.address,
+        telegram: response.data.telegram,
+      })
     });
   }
 
   public submit() {
     this.personalAreaSettingsService
       .submitSettings(this.currentUser, {
-        workPhoneNumber: '113333333',
+        firstName: this.formSettings.controls.firstName.value,
+        lastName: this.formSettings.controls.lastName.value,
+        workPhoneNumber: this.formSettings.controls.workPhoneNumber.value,
+        address: this.formSettings.controls.address.value,
+        telegram: this.formSettings.controls.telegram.value,
       })
       .subscribe((response) => console.log(response));
   }
