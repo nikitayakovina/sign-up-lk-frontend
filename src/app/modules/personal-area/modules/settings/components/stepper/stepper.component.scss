@@ -1,0 +1,52 @@
+.stepper {
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:not(:last-child) {
+        flex: 1;
+      }
+
+      &:before {
+        --size: 3rem;
+        content: "";
+        display: block;
+        flex: 0 0 var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        background: #53ddf3;
+      }
+
+      &:not(:last-child):after {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background-color: #e0e0e0;
+        margin-inline-end: 0.5rem;
+      }
+
+      &__active {
+        color: #53ddf3;
+      }
+
+      &__not-active {
+        color: gray;
+      }
+    }
+
+    &__content {
+
+    }
+  }
+}

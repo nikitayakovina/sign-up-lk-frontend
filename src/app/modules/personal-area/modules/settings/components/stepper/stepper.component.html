@@ -1,0 +1,17 @@
+<div class="stepper">
+    <div class="stepper__list">
+        <div *ngFor="let step of steps; let i = index"
+            [ngClass]="{
+                'stepper__list__item__active': selectedIndex === i
+            }"
+            class="stepper__list__item"
+            (click)="selectedIndex = i">
+            <ng-container *ngIf="step.stepLabel; else showLabelText" [ngTemplateOutlet]="step.stepLabel.template"></ng-container>
+            <ng-template #showLabelText>
+                {{ step.label }}
+            </ng-template>
+        </div>
+    </div>
+
+    <ng-container class="stepper__list__content" [ngTemplateOutlet]="selected.content"></ng-container>
+</div>
