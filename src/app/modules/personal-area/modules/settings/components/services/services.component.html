@@ -1,0 +1,12 @@
+<button (click)="modalService.openModal(modalServices)">Добавить услугу</button>
+<ng-template #modalServices>
+    <div class="modal-calendar-header">
+        <h4 class="modal-title pull-left">Добавление услуги</h4>
+    </div>
+    <div class="modal-body">
+        <app-services-modal></app-services-modal>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="modalService.closeModal()">Закрыть</button>
+    </div>
+</ng-template>

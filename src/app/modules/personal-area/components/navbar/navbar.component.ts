@@ -1,10 +1,5 @@
-import { Component } from '@angular/core';
-import { NavbarEnum } from '../../../../shared/enums/navbar.enum';
-
-export interface INavbarItems {
-  title: string;
-  id: NavbarEnum;
-}
+import { Component, Input } from '@angular/core';
+import { INavbarItems } from '../../interfaces/navbar.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -12,20 +7,14 @@ export interface INavbarItems {
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  public itemsNavbar: INavbarItems[] = [
-    {
-      title: 'Главная',
-      id: NavbarEnum.main,
-    },
-    {
-      title: 'Настройки',
-      id: NavbarEnum.settings,
-    },
-    {
-      title: 'Календарь',
-      id: NavbarEnum.calendar,
-    },
-  ];
+  @Input() public item: INavbarItems;
+  public isExpanded: boolean = false;
 
   constructor() {}
+
+  public onItemSelected(item: INavbarItems, event?: Event) {
+    if (item.children && item.children.length) {
+      this.isExpanded = !this.isExpanded;
+    }
+  }
 }

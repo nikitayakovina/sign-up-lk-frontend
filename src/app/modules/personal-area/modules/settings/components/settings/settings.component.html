@@ -1,11 +1,11 @@
-<app-visibility-on-site></app-visibility-on-site>
+<app-visibility-on-site (onSelectVisibility)="onSelectVisibility($event)"></app-visibility-on-site>
 
 <app-stepper #cdkStepper>
     <cdk-step [stepControl]="stepsSettingsForm">
         <ng-template cdkStepLabel>
             <span>Персональная информация</span>
         </ng-template>
-        <form [formGroup]="stepsSettingsForm" (ngSubmit)="submit()">
+        <form [formGroup]="stepsSettingsForm.controls.personalData">
             <div class="form-group">
                 <div>
                     <label for="firstName">Имя пользователя</label>
@@ -44,7 +44,7 @@
         <ng-template cdkStepLabel>
             <span>Услуги</span>
         </ng-template>
-        <span>qwe2</span>
+        <app-services></app-services>
     </cdk-step>
     <cdk-step>
         <ng-template cdkStepLabel>
@@ -54,46 +54,8 @@
     </cdk-step>
 </app-stepper>
 <button
-        type="submit"
-        class="form-group__button btn btn-primary button-submit"
-        [disabled]="!stepsSettingsForm.valid">
-    Сохранить</button>
-<!--<form [formGroup]="formSettings" (ngSubmit)="submit()">-->
-<!--    <div class="form-group">-->
-<!--        <div>-->
-<!--            <label for="firstName">Имя пользователя</label>-->
-<!--        </div>-->
-<!--        <div class="form-group__name">-->
-<!--            <input-->
-<!--                type="text"-->
-<!--                class="form-control"-->
-<!--                id="firstName"-->
-<!--                formControlName="firstName">-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <label for="lastName">Фамилия пользователя</label>-->
-<!--        </div>-->
-<!--        <div class="form-group__surname">-->
-<!--            <input-->
-<!--                    type="text"-->
-<!--                    class="form-control"-->
-<!--                    id="lastName"-->
-<!--                    formControlName="lastName">-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <label for="workPhoneNumber">Номер телефона</label>-->
-<!--        </div>-->
-<!--        <div class="form-group__phone">-->
-<!--            <input-->
-<!--                type="text"-->
-<!--                class="form-control right"-->
-<!--                id="workPhoneNumber"-->
-<!--                formControlName="workPhoneNumber">-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <button-->
-<!--        type="submit"-->
-<!--        class="form-group__button btn btn-primary button-submit"-->
-<!--        [disabled]="!formSettings.valid">-->
-<!--        Сохранить</button>-->
-<!--</form>-->
+    type="submit"
+    class="form-group__button btn btn-primary button-submit"
+    (click)="submit()">
+    Сохранить
+</button>

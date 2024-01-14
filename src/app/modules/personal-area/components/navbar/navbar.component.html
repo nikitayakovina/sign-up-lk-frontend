@@ -1,10 +1,21 @@
-<div class="navbar">
-    <ul class="navbar__list">
-        <li *ngFor="let item of itemsNavbar"
-            class="navbar__list__item"
-            [routerLink]="[item.id]"
-            routerLinkActive="active">
-            {{ item.title }}
-        </li>
-    </ul>
+<li
+    class="navbar__item"
+    [ngClass]="{'parent-active': isExpanded && item?.children && item.children.length > 0}"
+    [routerLink]="[item.children ? item.children[0].id : item.id]"
+    routerLinkActive="active"
+    (click)="onItemSelected(item)">
+    {{ item.title }}
+    <img
+        *ngIf="item?.children"
+        class="svg-icon navbar__icon"
+        [src]="isExpanded ? '/assets/img/sprite/arrow-up.svg' : '/assets/img/sprite/arrow-down.svg'">
+</li>
+
+<div *ngIf="isExpanded && item?.children && item.children.length > 0">
+    <app-navbar
+        *ngFor="let child of item.children; let first = first"
+        [item]="child"
+        class="navbar__item__child"
+        (click)="first && onItemSelected(child)"
+    ></app-navbar>
 </div>

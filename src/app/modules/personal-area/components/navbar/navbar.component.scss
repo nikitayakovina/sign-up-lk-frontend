@@ -1,22 +1,33 @@
 .navbar {
-  &__list {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
+  &__item {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
 
-    &__item {
-      text-align: center;
-
-      @media (hover: hover) {
-        &:hover,
-        &:focus {
-          cursor: pointer;
-        }
+    @media (hover: hover) {
+      &:hover,
+      &:focus {
+        cursor: pointer;
       }
     }
+
+    &__child {
+      display: block;
+      padding-left: 10px;
+    }
+  }
+
+  &__icon {
+    align-self: center;
+    margin-right: 10px;
   }
 }
 
 .active {
   background: cadetblue;
+}
+
+.parent-active {
+  background: none;
 }
