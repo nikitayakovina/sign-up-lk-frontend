@@ -36,18 +36,24 @@ export class RequestForSpecializationParametersService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiGetParamsGet$Response(
-    params?: {
+    params: {
 
     /**
-     * массив цифр где 0-маникюр, 1-педикюр, 2-визажист
+     * Токен пользователя (введите в формате Bearer {ваш токен})
      */
-      numbers?: Array<0 | 1 | 2>;
+      token: string;
+
+    /**
+     * Массив цифр, где 0 - маникюр, 1 - педикюр, 2 - визажист
+     */
+      params?: Array<0 | 1 | 2>;
     },
     context?: HttpContext
   ): Observable<StrictHttpResponse<SpecializationParametersResponse>> {
     const rb = new RequestBuilder(this.rootUrl, RequestForSpecializationParametersService.ApiGetParamsGetPath, 'get');
     if (params) {
-      rb.query('numbers', params.numbers, {"style":"form","explode":false});
+      rb.header('token', params.token, {});
+      rb.query('params', params.params, {"style":"form","explode":false});
     }
 
     return this.http.request(
@@ -71,12 +77,17 @@ export class RequestForSpecializationParametersService extends BaseService {
    * This method doesn't expect any request body.
    */
   apiGetParamsGet(
-    params?: {
+    params: {
 
     /**
-     * массив цифр где 0-маникюр, 1-педикюр, 2-визажист
+     * Токен пользователя (введите в формате Bearer {ваш токен})
      */
-      numbers?: Array<0 | 1 | 2>;
+      token: string;
+
+    /**
+     * Массив цифр, где 0 - маникюр, 1 - педикюр, 2 - визажист
+     */
+      params?: Array<0 | 1 | 2>;
     },
     context?: HttpContext
   ): Observable<SpecializationParametersResponse> {
