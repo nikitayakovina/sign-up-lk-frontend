@@ -4,4 +4,5 @@ export enum NavbarEnum {
   personalSettings = NavbarEnum.settings + '/personalSettings',
   mailSettings = NavbarEnum.settings + '/mailSettings',
   calendar = 'calendar',
+  analyze = 'analyze',
 }

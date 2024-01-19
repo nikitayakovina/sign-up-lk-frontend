@@ -31,5 +31,9 @@ export class PersonalAreaComponent {
       title: 'Календарь',
       id: NavbarEnum.calendar,
     },
+    {
+      title: 'Аналитика',
+      id: NavbarEnum.analyze,
+    },
   ];
 }
