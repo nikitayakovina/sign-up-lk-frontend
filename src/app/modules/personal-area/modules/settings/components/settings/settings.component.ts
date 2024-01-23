@@ -4,6 +4,12 @@ import { AuthService } from '../../../../../../shared/services/auth.service';
 import { PersonalAreaSettingsService } from '../../services/personal-area-settings.service';
 import { CdkStepper } from '@angular/cdk/stepper';
 import { ParametersService } from '../../services/parameters.service';
+import { map } from 'rxjs/operators';
+
+export interface IBasicService {
+  id: number;
+  title: string;
+}
 
 @Component({
   selector: 'app-settings',
@@ -32,9 +38,15 @@ export class SettingsComponent implements OnInit {
     }),
   });
 
+  public basicServices: IBasicService[] = [];
+  public selectedBasicServices: IBasicService[] = [];
+
+  public isPublishedSearch: boolean = false;
+
   constructor(
     private authService: AuthService,
     private personalAreaSettingsService: PersonalAreaSettingsService,
+    private parametersService: ParametersService,
   ) {}
 
   public ngOnInit() {
@@ -55,6 +67,11 @@ export class SettingsComponent implements OnInit {
   }
 
   public submit() {
+    if (this.isPublishedSearch) {
+      this.cdkSteppercdkStepper.next();
+      return;
+    }
+
     this.personalAreaSettingsService
       .submitSettings(this.currentUser, {
         activeAccount: true,
@@ -72,6 +89,39 @@ export class SettingsComponent implements OnInit {
       .subscribe((response) => console.log(response));
   }
 
-  public onSelectVisibility = ($event: boolean) =>
+  public onSelectVisibility($event: boolean) {
     this.stepsSettingsForm.controls.personalData.controls.activeAccount.setValue($event);
+
+    if (!$event) {
+      // this.basicServices = [];
+      this.isPublishedSearch = false;
+
+      return;
+    }
+
+    this.isPublishedSearch = true;
+
+    // this.parametersService
+    //   .fetchParams()
+    //   .pipe(
+    //     map((services) =>
+    //       services.msg.map((service, index) => {
+    //         return { id: index, title: service.service };
+    //       }),
+    //     ),
+    //   )
+    //   .subscribe((services: IBasicService[]) => {
+    //     this.basicServices = services;
+    //   });
+  }
+
+  public changeBasicService(item: IBasicService) {
+    const index = this.selectedBasicServices.indexOf(item);
+
+    if (index !== -1) {
+      this.selectedBasicServices.splice(index, 1);
+    } else {
+      this.selectedBasicServices.push(item);
+    }
+  }
 }

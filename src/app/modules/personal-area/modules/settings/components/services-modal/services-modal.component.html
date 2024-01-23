@@ -1,44 +1,49 @@
-<div class="auth-form">
-    <form [formGroup]="formService">
-        <div class="form-group">
-            <div class="btn-group" dropdown>
-                <button
-                    id="button-animated"
-                    dropdownToggle
-                    type="button"
-                    class="btn btn-primary dropdown-toggle"
-                    aria-controls="dropdown-animated"
-                >
-                    Выберите основную услугу
-                    <span class="caret"></span>
-                </button>
-                <ul
-                    *dropdownMenu
-                    id="dropdown-animated"
-                    class="dropdown-menu"
-                    role="menu"
-                    aria-labelledby="button-animated"
-                >
-                    <li></li>
-                    <li *ngFor="let service of services" role="menuitem">
-                        <a class="dropdown-item" href="#">{{ service.service }}</a>
-                    </li>
-                </ul>
-            </div>
-<!--            <div>-->
-<!--                <label for="service">Введите наименование услуги</label>-->
-<!--            </div>-->
-<!--            <input type="text" class="form-control" id="service" formControlName="service">-->
+<form [formGroup]="formService" (ngSubmit)="submit()">
+    <label for="service">Выберите основную услугу: *</label>
+    <select id="service" name="service" formControlName="service" (change)="serviceSelected()">
+        <option disabled selected>Не выбрано</option>
+        <option *ngFor="let service of services" [value]="service.title">{{ service.title }}</option>
+    </select>
+
+    <label for="basicService">Основная услуга: *</label>
+    <input type="text" id="basicService" name="basicService" formControlName="basicService">
+
+    <div *ngIf="selectedService?.additionalServices.length">
+        <label for="additionalServices">Дополнительные услуги:</label>
+        <select id="additionalServices" name="additionalServices" formControlName="additionalServices" (change)="serviceSelected(true)">
+            <option disabled selected value="">Не выбрано</option>
+            <option *ngFor="let additionalService of selectedService?.additionalServices" [value]="additionalService">{{ additionalService }}</option>
+        </select>
+
+        <div *ngIf="isSelectedAdditionalService">
+            <label for="additionalPrice">Цена дополнительной услуги: *</label>
+            <input type="text" id="additionalPrice" name="additionalPrice" formControlName="additionalPrice">
+
+            <button type="submit" (click)="addAdditionalService()">Добавть дополнительную услугу</button>
         </div>
-        <div class="form-group">
-            <div>
-                <label for="price">Введите стоимость услуги</label>
-            </div>
-            <input type="text" class="form-control" id="price" formControlName="price">
+    </div>
+
+    <label for="price">Цена основной услуги: *</label>
+    <input type="text" id="price" name="price" formControlName="price">
+
+    <button type="submit">Отправить</button>
+</form>
+
+<div class="additional__services__list">
+    <div *ngFor="let additionalService of selectedAdditionalService" class="additional__services__list-item">
+        <div class="additional__services__list-item__title">
+            {{ additionalService.service }}
         </div>
-        <button
-            type="submit"
-            class="btn btn-primary button-submit"
-            (click)="onSubmit()">Добавить</button>
-    </form>
+        <div
+            class="additional__services__list-item__price"
+            contenteditable="true"
+            (input)="updateServicePrice(additionalService, $event)">
+            {{ additionalService.price }}
+        </div>
+        <div class="additional__services__list-item__icon" (click)="removeAdditionalService(additionalService)">
+            <img class="svg-icon" src="../../../../../../../assets/img/sprite/remove.svg">
+        </div>
+    </div>
 </div>
+
+

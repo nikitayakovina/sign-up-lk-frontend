@@ -5,3 +5,18 @@
     float: right;
   }
 }
+
+.services {
+  &__title {
+
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+
+    &-item {
+
+    }
+  }
+}

@@ -1,0 +1,69 @@
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+form::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: #ccc; /* Цвет линии */
+    margin-top: 16px; /* Расстояние между формой и линией */
+    border-bottom: 1px dashed #bbb; /* Стиль пунктирной линии */
+}
+
+.additional__services__list {
+    &-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__title {
+            flex: 2;
+            text-align: left;
+        }
+
+        &__price {
+            flex: 1;
+            text-align: left;
+        }
+
+        &__icon {
+            cursor: pointer;
+        }
+    }
+}
