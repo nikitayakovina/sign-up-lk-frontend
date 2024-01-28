@@ -1,23 +1,17 @@
-// import { Injectable } from '@angular/core';
-// import { SettingsService } from '../../../../api/open-api/services/settings.service';
-// import { PostSearchServiceSettingsRequest } from '../../../../api/open-api/models/post-search-service-settings-request';
-// import { Observable } from 'rxjs';
-// import { PostSearchServiceSettingsResponse } from '../../../../api/open-api/models/post-search-service-settings-response';
-// import { GetSearchServiceSettingsResponse } from '../../../../api/open-api/models/get-search-service-settings-response';
-//
-// @Injectable({
-//     providedIn: 'root',
-// })
-// export class PersonalAreaSettingsService {
-//     constructor(private settingsService: SettingsService) {}
-//
-//     public fetchData(userId: string): Observable<GetSearchServiceSettingsResponse> {
-//         return this.settingsService.apiSettingsSearchServiceGet({ userId });
-//     }
-//
-//     public submitSettings(
-//         body: PostSearchServiceSettingsRequest,
-//     ): Observable<PostSearchServiceSettingsResponse> {
-//         return this.settingsService.apiSettingsSearchServicePost({ body });
-//     }
-// }
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ManagingCalendarEventsService } from "../../../../../api/open-api/services/managing-calendar-events.service";
+import { GetCalendarEventsResponse } from "../../../../../api/open-api/models/get-calendar-events-response";
+import {AuthService} from "../../../../../shared/services/auth.service";
+
+@Injectable({
+    providedIn: 'root',
+})
+export class CalendarEventService {
+    constructor(private authService: AuthService, private calendarEvents: ManagingCalendarEventsService) {}
+
+    public fetchCalendarEvents(dates: Array<string>): Observable<GetCalendarEventsResponse> {
+        const token = this.authService.currentUserValue;
+        return this.calendarEvents.apiCalendarGet({ token, dates });
+    }
+}

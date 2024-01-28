@@ -7,7 +7,7 @@
 </div>
 <div class="grid__items-wrapper">
     <div class="grid__items__itemCell"
-         *ngFor="let day of daysArray"
+         *ngFor="let day of (daysArray$ | async)"
          [ngClass]="{
       'grid__items__itemCell-weekend': day.day() === 6 || day.day() === 0,
       'grid__items__itemCell-selectedMonth': isSelectedMonth(day),

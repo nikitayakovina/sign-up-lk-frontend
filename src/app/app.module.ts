@@ -15,7 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './components/main/main.component';
 import { JournalComponent } from './components/journal/journal.component';
 import { NgxsModule } from '@ngxs/store';
-import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
+import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
+import { SettingsState } from "./store/states/settings/settings.state";
+import {CalendarState} from "./store/states/calendar/calendar.state";
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -34,7 +36,7 @@ const config: SocketIoConfig = {
     ReactiveFormsModule,
     HttpClientModule,
     SocketIoModule.forRoot(config),
-    NgxsModule.forRoot([]),
+    NgxsModule.forRoot([SettingsState, CalendarState]),
     environment.production ? [] : NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [AuthService, BsModalService, ModalService],

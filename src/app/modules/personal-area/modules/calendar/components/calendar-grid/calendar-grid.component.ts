@@ -1,59 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
-import * as moment from "moment/moment";
-moment.updateLocale("en", {week: {dow: 1}});
+import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment/moment';
+import { Select, Store } from '@ngxs/store';
+import { CalendarState } from '../../../../../../store/states/calendar/calendar.state';
+import { Observable } from 'rxjs';
 
+// передаем на бэк в виде строки 'YYYY-MM-DD' а там уже в new Date() а старт и конец уже подумать
+// подумать над архитиктурой данного компонента и вложенных, где получать данные о записях и в целом
+// console.log(new Date(this._daysArray[0].format('YYYY-MM-DD')))
+// console.log(this._daysArray[0].format('YYYY-MM-DDTHH:mm:ss.SSSZ'))
+// console.log(this._startWeek.format('YYYY-MM-DD'))
 @Component({
   selector: 'calendar-grid',
   templateUrl: './calendar-grid.component.html',
-  styleUrls: ['./calendar-grid.component.scss']
+  styleUrls: ['./calendar-grid.component.scss'],
 })
 export class CalendarGridComponent implements OnInit {
-  private _totalDays: number;
-  private _daysArray: moment.Moment[];
-  private _today: moment.Moment = moment();
-  private _startWeek: moment.Moment = moment();
-  private _currentSelectedMonth: moment.Moment = moment();
+  @Select(CalendarState.getDaysArray) daysArray$: Observable<moment.Moment[]>;
+  constructor(private store: Store) {}
+  ngOnInit() {}
 
-  @Input() public set totalDays(days: number) {
-    if (this._totalDays !== days) {
-      this._totalDays = days;
-    }
+  public isCurrentDay(day: moment.Moment) {
+    return moment().isSame(day, 'day');
   }
-  @Input() public set today(today: moment.Moment) {
-    if (!this._today.isSame(today, 'day')) {
-      this._today = today.clone();
-      this._currentSelectedMonth = today.clone();
-      this.initializingConfiguration();
-    }
-  }
-  @Input() public set startWeek(startWeek: moment.Moment) {
-    if (!this._startWeek.isSame(startWeek, 'day')) {
-      this._startWeek = startWeek.clone();
-      this.initializingConfiguration();
-    }
-  }
-
-  public get daysArray() {
-    return this._daysArray;
-  }
-  public get today() {
-    return this._today;
-  }
-
-  constructor() {}
-  ngOnInit() {
-    this.initializingConfiguration();
-  }
-
-  private initializingConfiguration() {
-    this._today = this._startWeek.clone().subtract(1, "day");
-    this._daysArray = [...Array(this._totalDays)].map(() => this._today.add(1, "day").clone());
-  }
-  public isCurrentDay(day: moment.Moment)  {
-    return moment().isSame(day, "day");
-  }
-  public isSelectedMonth (day: moment.Moment) {
-    return this._currentSelectedMonth.isSame(day, "month");
+  public isSelectedMonth(day: moment.Moment) {
+    const currentMonth = this.store.selectSnapshot((state) => state.calendar.today);
+    return currentMonth.isSame(day, 'month');
   }
 
   protected readonly moment = moment;
