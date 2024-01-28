@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/settings/settings.module').then((m) => m.SettingsModule),
       },
+      {
+        path: 'analyze',
+        loadChildren: () => import('./modules/analyze/analyze.module').then((m) => m.AnalyzeModule),
+      },
     ],
   },
 ];
