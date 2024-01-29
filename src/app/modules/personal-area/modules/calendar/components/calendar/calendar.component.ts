@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CalendarEventService } from '../../services/personal-area-calendar.service';
 import { Select, Store } from '@ngxs/store';
 import { CalendarState } from '../../../../../../store/states/calendar/calendar.state';
-import { GetToday } from '../../../../../../store/actions/calendar/calendar.actions';
+import { GetEventsDays, GetToday } from '../../../../../../store/actions/calendar/calendar.actions';
 
 @Component({
   selector: 'app-calendar',
@@ -17,10 +17,16 @@ export class CalendarComponent implements OnInit {
     this.store.dispatch(
       new GetToday(this.store.selectSnapshot(CalendarState.getToday).clone().subtract(1, 'month')),
     );
+    this.store.dispatch(
+      new GetEventsDays(this.store.selectSnapshot(CalendarState.getObjectCalendarEvents)),
+    );
   }
   public handleNextClick() {
     this.store.dispatch(
       new GetToday(this.store.selectSnapshot(CalendarState.getToday).clone().add(1, 'month')),
+    );
+    this.store.dispatch(
+      new GetEventsDays(this.store.selectSnapshot(CalendarState.getObjectCalendarEvents)),
     );
   }
   public handleTodayClick() {
@@ -28,24 +34,8 @@ export class CalendarComponent implements OnInit {
   }
   constructor(private calendarEvents: CalendarEventService, private store: Store) {}
   ngOnInit(): void {
-    this.fetchCalendarEvents();
-  }
-  fetchCalendarEvents() {
-    const token = 'ваш_токен';
-    const dates = ['начало_периода', 'конец_периода'];
-
-    this.calendarEvents.fetchCalendarEvents(dates).subscribe((e) => {
-      // console.log('test ', e);
-    });
-
-    // this.calendarEvents.apiCalendarGet$Response({ token, dates })
-    //   .subscribe(
-    //     (response: GetCalendarEventsResponse) => {
-    //       this.events = response.body; // Предполагается, что ответ содержит массив объектов
-    //     },
-    //     error => {
-    //       console.error('Ошибка при получении календарных событий', error);
-    //     }
-    // );
+    this.store.dispatch(
+      new GetEventsDays(this.store.selectSnapshot(CalendarState.getObjectCalendarEvents)),
+    );
   }
 }

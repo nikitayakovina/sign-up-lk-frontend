@@ -10,3 +10,8 @@ export class GetToday {
 
   constructor(public momentObject: Moment) {} // изменить типы
 }
+
+export class GetEventsDays {
+  static readonly type = '[Calendar] Get Events Days';
+  constructor(public arrayData: any) {}
+}

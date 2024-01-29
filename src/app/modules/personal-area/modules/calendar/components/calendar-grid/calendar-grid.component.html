@@ -1,21 +1,35 @@
-<div class="grid__items-header">
-    <div class="grid__items-weekNameCell" *ngFor="let day of [0,1,2,3,4,5,6]">
-        <div>
-            {{ moment().day(day + 1).locale('ru').format('ddd') }}
+<!--<ng-container *ngIf="objectCalendarEvents$ !== null; else templateSceleton">-->
+<ng-container *ngIf="objectCalendarEvents$ !== null">
+    <div class="grid__items-header">
+        <div class="grid__items-weekNameCell" *ngFor="let day of [0,1,2,3,4,5,6]">
+            <div>
+                {{ moment().day(day + 1).locale('ru').format('ddd') }}
+            </div>
         </div>
     </div>
-</div>
-<div class="grid__items-wrapper">
-    <div class="grid__items__itemCell"
-         *ngFor="let day of (daysArray$ | async)"
-         [ngClass]="{
-      'grid__items__itemCell-weekend': day.day() === 6 || day.day() === 0,
-      'grid__items__itemCell-selectedMonth': isSelectedMonth(day),
-      'grid__items__itemCell-weekendMonth': isSelectedMonth(day) && (day.day() === 6 || day.day() === 0)
+    <div class="grid__items-wrapper">
+        <div class="grid__items__itemCell"
+             *ngFor="let objectCalendarEvent of (objectCalendarEvents$ | async)"
+             [ngClass]="{
+      'grid__items__itemCell-weekend': objectCalendarEvent.moment.day() === 6 || objectCalendarEvent.moment.day() === 0,
+      'grid__items__itemCell-selectedMonth': isSelectedMonth(objectCalendarEvent.moment),
+      'grid__items__itemCell-weekendMonth': isSelectedMonth(objectCalendarEvent.moment) && (objectCalendarEvent.moment.day() === 6 || objectCalendarEvent.moment.day() === 0)
     }">
-        <div class="grid__items-day"
-             [ngClass]="{ 'grid__items-current': isCurrentDay(day) }">
-            {{ isCurrentDay(day) ? day.format('D') : day.format('D')}}
+
+            <div class="grid__items-day"
+                 [ngClass]="{ 'grid__items-current': isCurrentDay(objectCalendarEvent.moment) }">
+                {{ isCurrentDay(objectCalendarEvent.moment) ? objectCalendarEvent.moment.format('D') : objectCalendarEvent.moment.format('D')}}
+            </div>
+            <ng-container *ngIf="objectCalendarEvent.events">
+                    <div
+                         *ngFor=" let event of objectCalendarEvent.events" class="grid__items-events"
+                         [ngClass]="{'green': event.service[0] === 1, 'blue': event.service[0] === 0}">
+                        <span>{{ event.name }}</span>
+                        <span>{{ event.start_time }}</span>
+                    </div>
+            </ng-container>
         </div>
     </div>
-</div>
+</ng-container>
+<!--<ng-template #templateSceleton></ng-template>-->
+<!--тут показать скелетон календаря-->

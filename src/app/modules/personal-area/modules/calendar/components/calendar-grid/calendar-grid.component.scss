@@ -30,6 +30,10 @@
     min-height: 80px;
     background-color: #1E1F21;
     color: #555759;
+    cursor: pointer;
+    &:hover {
+      border: 1px solid #404040;
+    }
     &-weekend {
       background-color: #272829;
       color: #555759;
@@ -44,11 +48,50 @@
     }
   }
   &-day {
-    height: 100%;
-    width: 100%;
+    //height: 100%;
+    //width: 100%;
     display: flex;
     justify-content: flex-end;
     padding-right: 8px;
+
+  }
+  &-events {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    gap: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    &:hover {
+      border-radius: 4px;
+      margin: 0 1px;
+      color: #220a08;
+    }
+    &.green:hover {
+      background-color: #32d74b;
+    }
+    &.blue:hover {
+      background-color: #1aadf8;
+    }
+    span {
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background-color: #32d74b;
+      border-radius: 50%;
+    }
+    &.green:before {
+      background-color: #32d74b;
+    }
+    &.blue:before {
+      background-color: #1aadf8;
+    }
   }
   &-current {
     height: 33px;
@@ -60,5 +103,10 @@
     border-radius: 50%;
     padding: 0;
     margin: 2px 2px 2px auto;
+    color: #220a08;
   }
 }
+
+// #32d74b
+// #1aadf8
+// #220a08
