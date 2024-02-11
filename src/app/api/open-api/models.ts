@@ -8,3 +8,4 @@ export { SpecializationParametersResponse } from './models/specialization-parame
 export { GetSearchServiceSettingsResponse } from './models/get-search-service-settings-response';
 export { PostSearchServiceSettingsResponse } from './models/post-search-service-settings-response';
 export { PostSearchServiceSettingsRequest } from './models/post-search-service-settings-request';
+export { GetCalendarEventsResponse } from './models/get-calendar-events-response';

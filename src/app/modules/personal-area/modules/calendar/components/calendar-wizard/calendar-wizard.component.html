@@ -1,13 +1,12 @@
 <div class="wizard__wrapper">
-        <div class="wizard__date">
-            <span>{{objectCurrentMonth.m}} </span>
-            <span>{{objectCurrentMonth.y}} </span>
-            <span>г.</span>
-        </div>
-
-        <div class="wizard__control">
-            <button (click)="onPrevClick()">&lt;</button>
-            <button (click)="onTodayClick()">сегодня</button>
-            <button (click)="onNextClick()">&gt;</button>
-        </div>
+    <div class="wizard__date" *ngIf="calendar$ | async as calendarState">
+        <span>{{calendarState.today.locale('ru').format('MMMM')}} </span>
+        <span>{{calendarState.today.format('YYYY')}} </span>
+        <span>г.</span>
+    </div>
+    <div class="wizard__control">
+        <button (click)="onPrevClick()">&lt;</button>
+        <button (click)="onTodayClick()">сегодня</button>
+        <button (click)="onNextClick()">&gt;</button>
+    </div>
 </div>

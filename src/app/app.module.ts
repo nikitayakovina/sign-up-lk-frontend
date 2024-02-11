@@ -17,6 +17,7 @@ import { JournalComponent } from './components/journal/journal.component';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { SettingsState } from './store/states/settings/settings.state';
+import {CalendarState} from "./store/states/calendar/calendar.state";
 
 const config: SocketIoConfig = {
   url: environment.url,
@@ -37,6 +38,7 @@ const config: SocketIoConfig = {
     SocketIoModule.forRoot(config),
     NgxsModule.forRoot([SettingsState]),
     environment.production ? [] : NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsModule.forRoot([SettingsState, CalendarState]),
   ],
   providers: [AuthService, BsModalService, ModalService],
   bootstrap: [AppComponent],

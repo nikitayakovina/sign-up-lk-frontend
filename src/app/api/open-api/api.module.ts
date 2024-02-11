@@ -7,6 +7,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { AuthenticationService } from './services/authentication.service';
 import { RequestForSpecializationParametersService } from './services/request-for-specialization-parameters.service';
 import { SettingsService } from './services/settings.service';
+import { ManagingCalendarEventsService } from './services/managing-calendar-events.service';
 
 /**
  * Module that provides all services and configuration.
@@ -19,6 +20,7 @@ import { SettingsService } from './services/settings.service';
     AuthenticationService,
     RequestForSpecializationParametersService,
     SettingsService,
+    ManagingCalendarEventsService,
     ApiConfiguration
   ],
 })

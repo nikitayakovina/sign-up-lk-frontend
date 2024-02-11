@@ -39,7 +39,7 @@ export class RequestForSpecializationParametersService extends BaseService {
     params: {
 
     /**
-     * Токен пользователя (введите в формате Bearer {ваш токен})
+     * Токен пользователя
      */
       token: string;
 
@@ -80,7 +80,7 @@ export class RequestForSpecializationParametersService extends BaseService {
     params: {
 
     /**
-     * Токен пользователя (введите в формате Bearer {ваш токен})
+     * Токен пользователя
      */
       token: string;
 
