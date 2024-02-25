@@ -1,12 +1,37 @@
-<button (click)="modalService.openModal(modalServices)">Добавить услугу</button>
 <ng-template #modalServices>
     <div class="modal-header">
-        <h4 class="modal-title pull-left">Добавление услуги</h4>
+        <h4 class="modal-title pull-left">{{ mode === ModeEnum.view ? 'Изменение' : 'Добавление' }} услуги</h4>
     </div>
     <div class="modal-body">
-        <app-services-modal (onSave)="modalService.closeModal()"></app-services-modal>
+        <app-services-modal [item]="mode === ModeEnum.view ? selectedService : null" (onSave)="modalService.closeModal()"></app-services-modal>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="modalService.closeModal()">Закрыть</button>
     </div>
 </ng-template>
+
+<div class="services__list">
+    <div *ngFor="let service of services" class="services__list-item" (click)="openService(service);modalService.openModal(modalServices)">
+        <div class="services__list-item__title">
+            {{ service.service }}
+        </div>
+        <div class="services__list-item__basic">
+            <div class="services__list-item__basic-title">
+                {{ service.basicService }}
+            </div>
+            <div class="services__list-item__basic-price">
+                {{ service.price }} руб.
+            </div>
+        </div>
+        <div *ngIf="service.additionalServices.length" class="services__list-item__additional">
+            <span>Дополнительные услуги:</span>
+            <div *ngFor="let additionalService of service.additionalServices"
+                class="services__list-item__additional-item">
+                <div class="services__list-item__additional-item__title"> {{ additionalService.service }} </div>
+                <div class="services__list-item__additional-item__price"> {{ additionalService.price }} руб. </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button (click)="modalService.openModal(modalServices)">Добавить услугу</button>

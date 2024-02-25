@@ -1,4 +1,7 @@
+import { Guid } from 'guid-typescript';
+
 export interface ISettingsAdd {
+  id?: Guid;
   service: string;
   price: string;
   basicService?: string;
@@ -12,10 +15,10 @@ export class AddSettings {
 
 export class UpdateSettings {
   static readonly type = '[Settings] Update';
-  constructor(public id: string, public changes: Partial<ISettingsAdd>) {}
+  constructor(public id: Guid, public changes: Partial<ISettingsAdd>) {}
 }
 
 export class DeleteSettings {
   static readonly type = '[Settings] Delete';
-  constructor(public id: string) {}
+  constructor(public id: Guid) {}
 }

@@ -1,7 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { AddSettings } from '../../../../../../store/actions/settings/settings.actions';
+import {
+  AddSettings,
+  ISettingsAdd,
+  UpdateSettings,
+} from '../../../../../../store/actions/settings/settings.actions';
+import { SettingsState } from '../../../../../../store/states/settings/settings.state';
 
 interface Service {
   title: string;
@@ -19,12 +24,13 @@ interface IAdditionalServices {
   templateUrl: './services-modal.component.html',
   styleUrls: ['./services-modal.component.scss'],
 })
-export class ServicesModalComponent {
+export class ServicesModalComponent implements OnInit {
+  @Input() item: ISettingsAdd;
   @Output() onSave = new EventEmitter();
 
   public formService = new FormGroup({
     service: new FormControl('Не выбрано', Validators.required),
-    basicService: new FormControl('', Validators.required),
+    basicService: new FormControl('Введите значение', Validators.required),
     additionalServices: new FormControl([''], null),
     price: new FormControl('0', Validators.required),
     additionalPrice: new FormControl('0', Validators.required),
@@ -75,6 +81,26 @@ export class ServicesModalComponent {
 
   constructor(private store: Store) {}
 
+  ngOnInit() {
+    console.log(this.item);
+    if (this.item) {
+      this.formService.patchValue({
+        service: this.item.service,
+        basicService: this.item.basicService,
+        // additionalServices: this.item.additionalServices,
+        price: this.item.price,
+        // additionalPrice: this.item.additionalPrice,
+      });
+    }
+    // this.store.select(SettingsState.getSettings).subscribe((settings: ISettingsAdd[]) => {
+    // if (settings.length) {
+    //   this.services = this.services.filter((service) =>
+    //     settings.find((setting) => setting.service !== service.title),
+    //   );
+    // }
+    // });
+  }
+
   serviceSelected(isAdditionalService: boolean = false) {
     if (isAdditionalService) {
       this.isSelectedAdditionalService = true;
@@ -90,14 +116,25 @@ export class ServicesModalComponent {
   }
 
   submit() {
-    this.store.dispatch(
-      new AddSettings({
-        service: this.formService.get('service').value.toString(),
-        price: this.formService.get('price').value.toString(),
-        basicService: this.formService.get('basicService').value.toString(),
-        additionalServices: this.selectedAdditionalService,
-      }),
-    );
+    if (this.item) {
+      this.store.dispatch(
+        new UpdateSettings(this.item.id, {
+          service: this.formService.get('service').value.toString(),
+          price: this.formService.get('price').value.toString(),
+          basicService: this.formService.get('basicService').value.toString(),
+          additionalServices: this.selectedAdditionalService,
+        }),
+      );
+    } else {
+      this.store.dispatch(
+        new AddSettings({
+          service: this.formService.get('service').value.toString(),
+          price: this.formService.get('price').value.toString(),
+          basicService: this.formService.get('basicService').value.toString(),
+          additionalServices: this.selectedAdditionalService,
+        }),
+      );
+    }
 
     this.onSave.emit();
   }
