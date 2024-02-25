@@ -7,6 +7,8 @@ import {
   CalendarWizardComponent,
 } from './components';
 import { CalendarRoutingModule } from './calendar-routing.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CalendarGridModalComponent } from './components/calendar-grid/calendar-grid-modal/calendar-grid-modal.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +16,9 @@ import { CalendarRoutingModule } from './calendar-routing.module';
     CalendarHeaderComponent,
     CalendarGridComponent,
     CalendarWizardComponent,
+    CalendarGridModalComponent,
   ],
-  imports: [CommonModule, CalendarRoutingModule],
+  imports: [CommonModule, CalendarRoutingModule, ModalModule.forRoot()],
   exports: [CalendarComponent],
 })
 export class CalendarModule {}

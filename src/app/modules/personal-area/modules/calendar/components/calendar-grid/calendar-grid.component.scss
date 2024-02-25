@@ -1,4 +1,5 @@
 .grid__items {
+  position: relative;
   &-wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -105,6 +106,10 @@
     margin: 2px 2px 2px auto;
     color: #220a08;
   }
+}
+::ng-deep .modal-dialog {
+  background: #000 !important;
+  font-size: 50px !important;
 }
 
 // #32d74b

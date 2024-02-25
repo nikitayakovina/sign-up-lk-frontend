@@ -1,6 +1,6 @@
 <!--<ng-container *ngIf="objectCalendarEvents$ !== null; else templateSceleton">-->
 <ng-container *ngIf="objectCalendarEvents$ !== null">
-    <div class="grid__items-header">
+    <div class="grid__items-header" #asd>
         <div class="grid__items-weekNameCell" *ngFor="let day of [0,1,2,3,4,5,6]">
             <div>
                 {{ moment().day(day + 1).locale('ru').format('ddd') }}
@@ -22,6 +22,7 @@
             </div>
             <ng-container *ngIf="objectCalendarEvent.events">
                     <div
+                         (click)="openModal($event)"
                          *ngFor=" let event of objectCalendarEvent.events" class="grid__items-events"
                          [ngClass]="{'green': event.service[0] === 1, 'blue': event.service[0] === 0}">
                         <span>{{ event.name }}</span>
@@ -33,3 +34,14 @@
 </ng-container>
 <!--<ng-template #templateSceleton></ng-template>-->
 <!--тут показать скелетон календаря-->
+<!--<ng-template #template>-->
+<!--    <div class="modal-header" [ngStyle]="modalStyle">-->
+<!--        <h4 class="modal-title pull-left">Modal</h4>-->
+<!--        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalService.closeModal()">-->
+<!--            <span aria-hidden="true" class="visually-hidden">&times;</span>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--    <div class="modal-body">-->
+<!--        This is a modal.-->
+<!--    </div>-->
+<!--</ng-template>-->
