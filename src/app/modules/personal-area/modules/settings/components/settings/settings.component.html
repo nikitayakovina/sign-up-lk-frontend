@@ -39,6 +39,17 @@
                 </div>
             </div>
         </form>
+
+<!--        <div class="services">-->
+<!--            <span class="services__title">Перечень предосталяемых услуг</span>-->
+<!--            <ul class="services__list">-->
+<!--                <li *ngFor="let item of basicServices" class="services__list-item">-->
+<!--                    <input type="checkbox" (change)="changeBasicService(item)">-->
+<!--                    {{ item.title }}-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
     </cdk-step>
     <cdk-step>
         <ng-template cdkStepLabel>
@@ -57,5 +68,5 @@
     type="submit"
     class="form-group__button btn btn-primary button-submit"
     (click)="submit()">
-    Сохранить
+    {{ isPublishedSearch ? 'Далее' : 'Сохранить' }}
 </button>

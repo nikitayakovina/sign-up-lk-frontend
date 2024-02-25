@@ -1,34 +1,18 @@
-import {Action, State, StateContext} from "@ngxs/store";
-import {AddSettings} from "../../actions/settings/settings.actions";
+import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { AddSettings, ISettingsAdd } from '../../actions/settings/settings.actions';
 
-interface ISettingsStateModel {
-    settings: {
-        activeAccount?: boolean;
-        socialNetwork?: Array<string>;
-        workPhoneNumber?: string;
-        firstName?: string;
-        lastName?: string;
-        userServices?: Array<{
-            service?: string;
-            price?: string;
-        }>;
-        additionalServices?: Array<string>;
-        address?: Array<string>;
-        whatsapp?: string;
-        telegram?: string;
-        typeUser?: Array<number>;
-    }
-}
-
-@State<ISettingsStateModel>({
-    name: 'settings',
-    defaults: {
-        settings: null,
-    },
+@State<ISettingsAdd>({
+  name: 'settings',
+  defaults: null,
 })
 export class SettingsState {
-    @Action(AddSettings)
-    setSettings(ctx: StateContext<ISettingsStateModel>, { settings }: AddSettings) {
-        ctx.patchState({ settings });
-    }
+  @Action(AddSettings)
+  setSettings(ctx: StateContext<ISettingsAdd>, { settings }: AddSettings) {
+    ctx.patchState(settings);
+  }
+
+  @Selector()
+  static getSettings(state: ISettingsAdd) {
+    return state;
+  }
 }

@@ -13,8 +13,11 @@ export class ParametersService {
     private authService: AuthService,
   ) {}
 
-  public fetchParams(): Observable<SpecializationParametersResponse> {
+  public fetchParams(params?: Array<0 | 1 | 2>): Observable<SpecializationParametersResponse> {
     const token = this.authService.currentUserValue;
-    return this.parametersService.apiGetParamsGet({ token, params: [0, 1] });
+    return this.parametersService.apiGetParamsGet({
+      token,
+      params: params?.length ? params : [0, 1, 2],
+    });
   }
 }
