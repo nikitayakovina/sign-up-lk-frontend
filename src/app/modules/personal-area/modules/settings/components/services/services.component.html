@@ -1,12 +1,15 @@
 <ng-template #modalServices>
     <div class="modal-header">
         <h4 class="modal-title pull-left">{{ mode === ModeEnum.view ? 'Изменение' : 'Добавление' }} услуги</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalService.closeModal()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
-        <app-services-modal [item]="mode === ModeEnum.view ? selectedService : null" (onSave)="modalService.closeModal()"></app-services-modal>
+        <app-services-modal #servicesModalComponent [item]="mode === ModeEnum.view ? selectedService : null" (onSave)="modalService.closeModal()"></app-services-modal>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="modalService.closeModal()">Закрыть</button>
+        <button type="button" class="btn btn-default btn-submit" [disabled]="!servicesModalComponent.formService.valid" (click)="servicesModalComponent.submit()">Отправить</button>
     </div>
 </ng-template>
 
@@ -34,4 +37,4 @@
     </div>
 </div>
 
-<button (click)="modalService.openModal(modalServices)">Добавить услугу</button>
+<button class="btn-submit" (click)="mode = ModeEnum.add; modalService.openModal(modalServices)">Добавить услугу</button>

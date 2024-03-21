@@ -10,6 +10,7 @@ import { ServicesComponent } from './components/services/services.component';
 import { ServicesModalComponent } from './components/services-modal/services-modal.component';
 import { MailSettingsComponent } from './components/mail-settings/mail-settings.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CdkStepperModule,
     BsDropdownModule,
     FormsModule,
+    TooltipModule,
   ],
   exports: [SettingsComponent],
 })

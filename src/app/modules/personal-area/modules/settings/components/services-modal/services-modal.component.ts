@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import {
   AddSettings,
   ISettingsAdd,
   UpdateSettings,
 } from '../../../../../../store/actions/settings/settings.actions';
-import { SettingsState } from '../../../../../../store/states/settings/settings.state';
 
 interface Service {
   title: string;
@@ -78,19 +77,33 @@ export class ServicesModalComponent implements OnInit {
   public selectedService: Service;
   public isSelectedAdditionalService: boolean = false;
   public selectedAdditionalService: IAdditionalServices[] = [];
+  public initialAdditionalService: string = 'Не выбрано';
+  public emptyAdditionalService: string = 'Не выбрано';
 
   constructor(private store: Store) {}
 
+  public get isDisabledButtonAdditional(): boolean {
+    return (
+      this.formService.get('additionalPrice')?.value === '0' ||
+      this.formService.get('additionalServices')?.value?.toString() === this.emptyAdditionalService
+    );
+  }
+
   ngOnInit() {
-    console.log(this.item);
+    this.formService.get('additionalServices').setValue(this.selectedService?.additionalServices);
+
     if (this.item) {
       this.formService.patchValue({
         service: this.item.service,
         basicService: this.item.basicService,
-        // additionalServices: this.item.additionalServices,
         price: this.item.price,
-        // additionalPrice: this.item.additionalPrice,
       });
+
+      if (this.item.additionalServices?.length) {
+        this.selectedAdditionalService = this.item.additionalServices;
+      }
+
+      this.serviceSelected();
     }
     // this.store.select(SettingsState.getSettings).subscribe((settings: ISettingsAdd[]) => {
     // if (settings.length) {
@@ -148,6 +161,7 @@ export class ServicesModalComponent implements OnInit {
     });
 
     this.formService.get('additionalPrice').setValue('0');
+    this.formService.get('additionalServices').setValue([this.emptyAdditionalService]);
   }
 
   removeAdditionalService(additionalService: IAdditionalServices) {

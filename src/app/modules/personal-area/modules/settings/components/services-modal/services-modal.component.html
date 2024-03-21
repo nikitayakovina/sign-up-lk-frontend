@@ -1,32 +1,54 @@
-<form [formGroup]="formService" (ngSubmit)="submit()">
+<form [formGroup]="formService">
     <label for="service">Выберите основную услугу: *</label>
-    <select id="service" name="service" formControlName="service" (change)="serviceSelected()">
+    <select id="service" name="service" formControlName="service" (change)="serviceSelected()" required>
         <option disabled selected>Не выбрано</option>
         <option *ngFor="let service of services" [value]="service.title">{{ service.title }}</option>
     </select>
 
-    <label for="basicService">Основная услуга: *</label>
-    <input type="text" id="basicService" name="basicService" formControlName="basicService">
+    <div class="basic__service">
+        <div class="basic__service-title">
+            <label for="basicService">Основная услуга: *</label>
+            <input type="text" id="basicService" name="basicService" formControlName="basicService">
+        </div>
 
-    <div *ngIf="selectedService?.additionalServices.length">
-        <label for="additionalServices">Дополнительные услуги:</label>
-        <select id="additionalServices" name="additionalServices" formControlName="additionalServices" (change)="serviceSelected(true)">
-            <option disabled selected value="">Не выбрано</option>
-            <option *ngFor="let additionalService of selectedService?.additionalServices" [value]="additionalService">{{ additionalService }}</option>
-        </select>
-
-        <div *ngIf="isSelectedAdditionalService">
-            <label for="additionalPrice">Цена дополнительной услуги: *</label>
-            <input type="text" id="additionalPrice" name="additionalPrice" formControlName="additionalPrice">
-
-            <button type="submit" (click)="addAdditionalService()">Добавть дополнительную услугу</button>
+        <div class="basic__service-price">
+            <label for="price">Цена: *</label>
+            <input type="text" id="price" name="price" formControlName="price">
         </div>
     </div>
 
-    <label for="price">Цена основной услуги: *</label>
-    <input type="text" id="price" name="price" formControlName="price">
+    <div *ngIf="selectedService?.additionalServices.length" class="additional__services">
+        <label for="additionalServices">Добавить дополнительную услугу</label>
 
-    <button type="submit">Отправить</button>
+        <div class="basic__service">
+            <div class="basic__service-title">
+                <label for="additionalServices">Дополнительная услуга: *</label>
+                <select id="additionalServices" name="additionalServices" formControlName="additionalServices" (change)="serviceSelected(true)" [(ngModel)]="initialAdditionalService">
+                    <option disabled [ngValue]="initialAdditionalService">{{ initialAdditionalService }}</option>
+                    <option *ngFor="let additionalService of selectedService?.additionalServices" [value]="additionalService">{{ additionalService }}</option>
+                </select>
+            </div>
+
+            <div class="basic__service-price">
+                <label for="additionalPrice">Цена: *</label>
+                <input type="text" id="additionalPrice" name="additionalPrice" formControlName="additionalPrice">
+            </div>
+
+            <div class="basic__service-button">
+                <button
+                    [style.cursor]="isDisabledButtonAdditional ? 'default' : 'pointer'"
+                    (click)="addAdditionalService()"
+                    [disabled]="isDisabledButtonAdditional"
+                    tooltip="Добавить доп. услугу">+</button>
+            </div>
+        </div>
+
+<!--        <div *ngIf="isSelectedAdditionalService">-->
+
+<!--            <button type="submit" (click)="addAdditionalService()">Добавть дополнительную услугу</button>-->
+<!--        </div>-->
+    </div>
+<!--    <button type="submit">Отправить</button>-->
 </form>
 
 <div class="additional__services__list">
@@ -35,13 +57,17 @@
             {{ additionalService.service }}
         </div>
         <div
+            #input
             class="additional__services__list-item__price"
             contenteditable="true"
             (input)="updateServicePrice(additionalService, $event)">
             {{ additionalService.price }}
         </div>
+        <div class="additional__services__list-item__icon" (click)="input.focus()">
+            <img class="svg-icon" tooltip="Изменить цену" placement="left bottom" src="../../../../../../../assets/img/sprite/pencil.svg">
+        </div>
         <div class="additional__services__list-item__icon" (click)="removeAdditionalService(additionalService)">
-            <img class="svg-icon" src="../../../../../../../assets/img/sprite/remove.svg">
+            <img class="svg-icon" tooltip="Удалить услугу" placement="left" src="../../../../../../../assets/img/sprite/remove.svg">
         </div>
     </div>
 </div>

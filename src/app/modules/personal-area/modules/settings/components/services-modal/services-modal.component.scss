@@ -9,7 +9,7 @@ select {
     width: 100%;
     padding: 8px;
     margin-bottom: 16px;
-    font-size: 14px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -30,6 +30,10 @@ button {
     background-color: #4caf50;
     color: #fff;
     cursor: pointer;
+
+    &-disabled {
+        cursor: none;
+    }
 }
 
 button:hover {
@@ -65,5 +69,29 @@ form::after {
         &__icon {
             cursor: pointer;
         }
+    }
+}
+
+.additional__services {
+    border: 1px solid #bababa;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #b3d6a6;
+}
+
+.basic__service {
+    display: flex;
+
+    &-title {
+        flex: 2;
+    }
+
+    &-price {
+        flex: 1;
+    }
+
+    &-button {
+        height: 20px;
+        align-self: center;
     }
 }
