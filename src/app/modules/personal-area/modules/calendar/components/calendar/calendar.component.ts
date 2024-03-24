@@ -7,7 +7,7 @@ import { CalendarState } from '../../../../../../store/states/calendar/calendar.
 import { GetEventsDays, GetToday } from '../../../../../../store/actions/calendar/calendar.actions';
 
 @Component({
-  selector: 'app-calendar',
+  selector: 'app-calendar ',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
