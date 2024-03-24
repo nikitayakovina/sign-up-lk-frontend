@@ -31,6 +31,9 @@ export class CalendarComponent implements OnInit {
   }
   public handleTodayClick() {
     this.store.dispatch(new GetToday(moment().clone()));
+    this.store.dispatch(
+      new GetEventsDays(this.store.selectSnapshot(CalendarState.getObjectCalendarEvents)),
+    );
   }
   constructor(private calendarEvents: CalendarEventService, private store: Store) {}
   ngOnInit(): void {

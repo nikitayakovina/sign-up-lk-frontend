@@ -14,7 +14,9 @@ export class CalendarWizardComponent implements OnInit {
   @Output() todayClicked = new EventEmitter<void>();
   @Select('calendar') calendar$: Observable<ICalendarStateModel>;
 
-  constructor() {}
+  constructor() {
+    // this.calendar$.subscribe((e) => console.log(e)); // вывод store calendar
+  }
   ngOnInit() {}
   public onPrevClick() {
     this.prevClicked.emit();
