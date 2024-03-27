@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ICalendarStateModel } from '../../../../../../store/states/calendar/calendar.state';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { ICalendarStateModel } from '../shared/types';
 
 @Component({
   selector: 'calendar-wizard',
@@ -15,7 +15,7 @@ export class CalendarWizardComponent implements OnInit {
   @Select('calendar') calendar$: Observable<ICalendarStateModel>;
 
   constructor() {
-    // this.calendar$.subscribe((e) => console.log(e)); // вывод store calendar
+    this.calendar$.subscribe((e) => console.log(e)); // вывод store calendar
   }
   ngOnInit() {}
   public onPrevClick() {

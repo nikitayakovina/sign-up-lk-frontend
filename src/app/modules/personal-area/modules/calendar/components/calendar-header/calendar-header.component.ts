@@ -17,6 +17,21 @@ export class CalendarHeaderComponent implements OnInit {
     this.startWatchTime();
   }
 
+  public switchDay() {
+    return '';
+  }
+
+  public switchWeek() {
+    return '';
+  }
+
+  public switchYear() {
+    return '';
+  }
+  public switchMonth() {
+    return '';
+  }
+
   public get time() {
     return this._time;
   }

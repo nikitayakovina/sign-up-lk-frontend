@@ -17,56 +17,47 @@ import { CalendarEventService } from '../../../modules/personal-area/modules/cal
 import { NgModule } from '@angular/core';
 import { GetCalendarEventsResponse } from '../../../api/open-api/models/get-calendar-events-response';
 import { SpecializationParametersResponse } from '../../../api/open-api/models/specialization-parameters-response';
+import {
+  ICalendarStateModel,
+  daysArray,
+  calendarEvents,
+} from '../../../modules/personal-area/modules/calendar/components/shared/types';
 moment.updateLocale('en', { week: { dow: 1 } });
-
-type calendarEvents = {
-  id?: string;
-  date?: string;
-  name?: string;
-  service?: Array<number>;
-  start_time?: string;
-  end_time?: string;
-  phone_number?: string;
-  notes?: string;
-};
-type daysArray = {
-  moment: moment.Moment;
-  events: calendarEvents[] | null;
-};
-export interface ICalendarStateModel {
-  totalDays: number;
-  today: moment.Moment;
-  startWeek: moment.Moment;
-  eventsDays: calendarEvents[] | null;
-  // daysArray: daysArray;
-  daysArray: moment.Moment[];
-  objectCalendarEvents: daysArray[] | null;
-}
 
 @State<ICalendarStateModel>({
   name: 'calendar',
   defaults: {
-    totalDays: 42,
+    totalDays: 42, // в дальнейшем изменяемый параметр для отображения в мобильной версии
+    // daysInCurrentYear: moment(`${moment().year()}-12-31`).dayOfYear(), // количество дней в текущем году
+    matrixDaysInCurrentYear: Array.from({ length: 12 }, (_, i) =>
+      Array.from(
+        { length: moment(`${moment().year()}-${i + 1}`, 'YYYY-M').daysInMonth() },
+        (_, j) => moment(`${moment().year()}-${i + 1}-${j + 1}`, 'YYYY-M-D'),
+      ),
+    ), // матрица дней в текущем году
     today: moment(),
     startWeek: moment().startOf('month').startOf('week'),
     eventsDays: null,
-    daysArray: [],
+    daysArray: Array.from({ length: 42 }, (_, i) =>
+      moment().startOf('month').startOf('week').subtract(1, 'day').add(i, 'day'),
+    ), // массив дней для текущего отображения
     objectCalendarEvents: null,
   },
 })
 @NgModule({
   providers: [CalendarEventService],
 })
+// todo NgxsOnInit возможно удалить
 export class CalendarState implements NgxsOnInit {
   constructor(private calendarEvents: CalendarEventService) {}
   ngxsOnInit(ctx: StateContext<ICalendarStateModel>): void {
-    const state = ctx.getState();
-    const startWeek = state.today.clone().startOf('month').startOf('week');
-    const today = startWeek.clone().subtract(1, 'day');
-    ctx.setState({
-      ...state,
-      daysArray: [...Array(state.totalDays)].map(() => today.add(1, 'day').clone()),
-    });
+    // const state = ctx.getState();
+    // const startWeek = state.today.clone().startOf('month').startOf('week');
+    // const today = startWeek.clone().subtract(1, 'day');
+    // ctx.setState({
+    //   ...state,
+    //   daysArray: [...Array(state.totalDays)].map(() => today.add(1, 'day').clone()),
+    // });
   }
   @Selector()
   static getDaysArray(state: ICalendarStateModel) {

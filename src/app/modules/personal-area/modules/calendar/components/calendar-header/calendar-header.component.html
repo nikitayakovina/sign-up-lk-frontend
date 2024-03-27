@@ -7,10 +7,10 @@
         </svg>
     </div>
     <div class="calendar__header-control">
-        <div>День</div>
-        <div>Неделя</div>
-        <div class="calendar__header-control-active">Месяц</div>
-        <div>Год</div>
+        <span (click)="switchDay()">День</span>
+        <span (click)="switchWeek()">Неделя</span>
+        <span class="calendar__header-control-active" (click)="switchMonth()">Месяц</span>
+        <span (click)="switchYear()">Год</span>
     </div>
     <div>
         {{ time }}
